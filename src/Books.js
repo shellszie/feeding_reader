@@ -5,6 +5,7 @@ import axios from 'axios';
 export default function Books() {
 
   const [books, setBooks] = useState([]);
+  const [data, setData] = useState([]);
 
   function parseBookData(input) {
     //title, author, cover image
@@ -27,20 +28,37 @@ export default function Books() {
 
   async function fetchBooks() {
     try {
-      const res = await axios.get('https://www.googleapis.com/books/v1/volumes?q=flowers')
+      const res = await axios.get('http://localhost:5000/googlebooks', {
+        params: {
+          searchTerm: 'cats'
+        }
+      })
       .then(response => {
+
         let parsedBooks = parseBookData(response.data);
         setBooks(parsedBooks);
-        debugger
         console.log(response.data)
       })
       } catch (error) {
-        console.error(error.message);
-      }
+      console.error(error.message);
+    }
+  }
+
+  async function fetchAPI() {
+      await axios.get('http://localhost:5000/api?name=michelle&animal=cat')
+      .then((response) => {
+        
+        console.log(response);
+        setData(response.data);
+      })
+      .catch((error) => {
+        console.error('Error fetching data:', error);
+      });
   }
   
   useEffect(() => {    
     fetchBooks(); 
+    // fetchAPI();
   }, []);
 
 
@@ -57,7 +75,8 @@ export default function Books() {
         ))}
       </ul>
 
-      
+      <h2>Data area: </h2>
+      <>{JSON.stringify(data)}</>      
       
     </>
   );
