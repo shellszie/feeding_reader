@@ -5,7 +5,7 @@ import axios from 'axios';
 export default function Books() {
 
   const [books, setBooks] = useState([]);
-  const [data, setData] = useState([]);
+  // const [data, setData] = useState([]);
 
   function parseBookData(input) {
     //title, author, cover image
@@ -28,7 +28,7 @@ export default function Books() {
 
   async function fetchBooks() {
     try {
-      const res = await axios.get('http://localhost:5000/googlebooks', {
+      await axios.get('http://localhost:5000/googlebooks', {
         params: {
           searchTerm: 'cats'
         }
@@ -59,24 +59,21 @@ export default function Books() {
   useEffect(() => {    
     fetchBooks(); 
     // fetchAPI();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
 
   return (
-    <>
-      <h1>Book Area:</h1>
-
-      <div class="container">
-        <div class="row">
-        {books.map((book) => (
-          <div class="col-sm">
-            <img src={book.image_url} /> <br/>
-            <span>{book.title} by {book.author}</span>
-          </div>
-        ))}
+    <div class="container">
+      <div class="row">
+      {books.map((book) => (
+        <div class="col-sm">
+          <img alt={book.title} src={book.image_url} /> <br/>
+          <span>{book.title} by {book.author}</span>
         </div>
+      ))}
       </div>
-    </>
+    </div>
   );
 }
 
