@@ -44,17 +44,17 @@ export default function Books() {
     }
   }
 
-  async function fetchAPI() {
-      await axios.get('http://localhost:5000/api?name=michelle&animal=cat')
-      .then((response) => {
+  // async function fetchAPI() {
+  //     await axios.get('http://localhost:5000/api?name=michelle&animal=cat')
+  //     .then((response) => {
         
-        console.log(response);
-        setData(response.data);
-      })
-      .catch((error) => {
-        console.error('Error fetching data:', error);
-      });
-  }
+  //       console.log(response);
+  //       setData(response.data);
+  //     })
+  //     .catch((error) => {
+  //       console.error('Error fetching data:', error);
+  //     });
+  // }
   
   useEffect(() => {    
     fetchBooks(); 
@@ -66,18 +66,16 @@ export default function Books() {
     <>
       <h1>Book Area:</h1>
 
-      <ul>
+      <div class="container">
+        <div class="row">
         {books.map((book) => (
-          <li>
+          <div class="col-sm">
             <img src={book.image_url} /> <br/>
-            <>{book.title} by {book.author}</>
-          </li>
+            <span>{book.title} by {book.author}</span>
+          </div>
         ))}
-      </ul>
-
-      <h2>Data area: </h2>
-      <>{JSON.stringify(data)}</>      
-      
+        </div>
+      </div>
     </>
   );
 }
