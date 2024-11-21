@@ -1,6 +1,9 @@
 import React from 'react';
 import {useState, useEffect} from 'react';
 import axios from 'axios';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
 export default function Books() {
 
@@ -58,22 +61,22 @@ export default function Books() {
   
   useEffect(() => {    
     fetchBooks(); 
-    // fetchAPI();
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
 
   return (
-    <div class="container">
-      <div class="row">
+    <Container>
+      <Row>
       {books.map((book) => (
-        <div class="col-sm">
+        <Col>
           <img alt={book.title} src={book.image_url} /> <br/>
           <span>{book.title} by {book.author}</span>
-        </div>
+        </Col>
       ))}
-      </div>
-    </div>
+      </Row>
+    </Container>
   );
 }
 
