@@ -4,11 +4,11 @@ import axios from 'axios';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import BookViewer from './BookViewer.js';
 
 export default function Books() {
 
   const [books, setBooks] = useState([]);
-  // const [data, setData] = useState([]);
 
   function parseBookData(input) {
     //title, author, cover image
@@ -21,12 +21,12 @@ export default function Books() {
       
       book.id = ctr++;
       book.title = info.title ? info.title : ""; 
-      book.author = info.authors ? info.authors[0] : ""
-      book.image_url = info.imageLinks && info.imageLinks.thumbnail ? info.imageLinks.thumbnail : ""
+      book.author = info.authors ? info.authors[0] : "";
+      book.image_url = info.imageLinks && info.imageLinks.thumbnail ? info.imageLinks.thumbnail : "";
+      book.isbn = info.industryIdentifiers[0].identifier;
       result.push(book);
     }
     return result;
-
   }
 
   async function fetchBooks() {
@@ -37,7 +37,6 @@ export default function Books() {
         }
       })
       .then(response => {
-
         let parsedBooks = parseBookData(response.data);
         setBooks(parsedBooks);
         console.log(response.data)
@@ -47,21 +46,8 @@ export default function Books() {
     }
   }
 
-  // async function fetchAPI() {
-  //     await axios.get('http://localhost:5000/api?name=michelle&animal=cat')
-  //     .then((response) => {
-        
-  //       console.log(response);
-  //       setData(response.data);
-  //     })
-  //     .catch((error) => {
-  //       console.error('Error fetching data:', error);
-  //     });
-  // }
-  
   useEffect(() => {    
-    fetchBooks(); 
-
+    fetchBooks();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -70,9 +56,10 @@ export default function Books() {
     <Container>
       <Row>
       {books.map((book) => (
-        <Col>
+        <Col key={book.id}>
           <img alt={book.title} src={book.image_url} /> <br/>
           <span>{book.title} by {book.author}</span>
+          <BookViewer isbn={book.isbn} id={book.id} />
         </Col>
       ))}
       </Row>
