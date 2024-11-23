@@ -5,49 +5,46 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import BookViewer from './BookViewer.js';
+import Book from './Book.js';
 
 export default function Books() {
 
-  const [books, setBooks] = useState([]);
+    const [allBooks, setAllBooks] = useState([]);
 
   function parseBookData(input) {
-    //title, author, cover image
     let items = input.items;
     let result = [];
     let ctr = 0;
     for (let i in items) {
       let info = items[i].volumeInfo;
+      let isbn = info.industryIdentifiers[0].identifier;
       let book = {};
-      
       book.id = ctr++;
-      book.title = info.title ? info.title : ""; 
+      book.title = info.title ? info.title : "";
       book.author = info.authors ? info.authors[0] : "";
-      book.image_url = info.imageLinks && info.imageLinks.thumbnail ? info.imageLinks.thumbnail : "";
-      book.isbn = info.industryIdentifiers[0].identifier;
+      book.img_url = info.imageLinks && info.imageLinks.thumbnail ? info.imageLinks.thumbnail : "";
+      book.isbn = isbn;
       result.push(book);
     }
     return result;
   }
 
-  async function fetchBooks() {
-    try {
-      await axios.get('http://localhost:5000/googlebooks', {
-        params: {
-          searchTerm: 'cats'
-        }
-      })
-      .then(response => {
-        let parsedBooks = parseBookData(response.data);
-        setBooks(parsedBooks);
-        console.log(response.data)
-      })
-      } catch (error) {
-      console.error(error.message);
-    }
-  }
+  useEffect(() => {
+    const fetchAllBooks = async () => {
+       try {
+        const response = await axios.get('http://localhost:5000/googlebooks', {
+          params: {
+            searchTerm: 'cats'
+          }
+        });
 
-  useEffect(() => {    
-    fetchBooks();
+        setAllBooks(parseBookData(response.data));
+
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    }
+    fetchAllBooks();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -55,12 +52,8 @@ export default function Books() {
   return (
     <Container>
       <Row>
-      {books.map((book) => (
-        <Col key={book.id}>
-          <img alt={book.title} src={book.image_url} /> <br/>
-          <span>{book.title} by {book.author}</span>
-          <BookViewer isbn={book.isbn} id={book.id} />
-        </Col>
+      {allBooks.map((book) => (
+        <Book title={book.title} author={book.author} isbn={book.isbn} img_url={book.img_url} id={book.id} />
       ))}
       </Row>
     </Container>

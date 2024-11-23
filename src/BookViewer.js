@@ -15,25 +15,11 @@ const BookViewer = ({isbn, id}) => {
 		    return
 		}
         else{
-//            if(window.viewer){
-                window.viewer = new window.google.books.DefaultViewer(canvasRef.current);
-                window.viewer.load('ISBN:'+isbn);
-                const canvas = document.getElementById("viewerCanvas-" + id);
-                modalRef.current.appendChild(canvas);
-                canvasRef.current.style.display = 'block';
-//            }
-//            else{
-//                debugger
-//                window.google.books.setOnLoadCallback(() => {
-//                    let viewer = new window.google.books.DefaultViewer(canvasRef.current);
-//                    window.viewer = viewer
-//                    viewer.load('ISBN:'+isbn);
-//                    const canvas = document.getElementById("viewerCanvas");
-//                    modalRef.current.appendChild(canvas);
-//                    canvasRef.current.style.display = 'block';
-//                });
-//                window.google.books.load();
-//            }
+            window.viewer = new window.google.books.DefaultViewer(canvasRef.current);
+            window.viewer.load('ISBN:'+isbn);
+            const canvas = document.getElementById("viewerCanvas-" + id);
+            modalRef.current.appendChild(canvas);
+            canvasRef.current.style.display = 'block';
         }
     }, [show])
 
@@ -50,16 +36,11 @@ const BookViewer = ({isbn, id}) => {
 		    return
 		}
         else{
-//            if(window.viewer){
-//                let viewer = new window.google.books.DefaultViewer(canvasRef.current);
-//            }
-//            else{
-                window.google.books.setOnLoadCallback(() => {
-                    let viewer = new window.google.books.DefaultViewer(canvasRef.current);
-                    window.viewer = viewer
-                });
-                window.google.books.load();
-//            }
+            window.google.books.setOnLoadCallback(() => {
+                let viewer = new window.google.books.DefaultViewer(canvasRef.current);
+                window.viewer = viewer
+            });
+            window.google.books.load();
         }
     }, [loaded])
 
@@ -72,14 +53,12 @@ const BookViewer = ({isbn, id}) => {
     return (
         <>
             <Button variant="primary" onClick={handleShow}>
-                Launch demo modal again
+                Preview
             </Button>
 
-
-           {/*<Modal show={show} onHide={handleClose}>*/}
            <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Modal heading</Modal.Title>
+                    <Modal.Title>ISBN: {isbn}</Modal.Title>
                 </Modal.Header>
 
                 <Modal.Body ref={modalRef}>
