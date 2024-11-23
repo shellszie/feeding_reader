@@ -34,17 +34,13 @@ const BookViewer = ({isbn, id}) => {
         if (!loaded) {
             return
         } else {
-            // window.google.books.setOnLoadCallback(() => {
-            //     let viewer = new window.google.books.DefaultViewer(canvasRef.current);
-            //     window.viewer = viewer
-            // });
             window.google.books.load();
         }
     }, [loaded])
 
     const divStyle = {
         height: '600px',
-        width: '500px',
+        width: '470px',
         display: 'none'
     };
 
