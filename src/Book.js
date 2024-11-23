@@ -10,43 +10,32 @@ const Book = ({isbn, title, author, img_url, id}) => {
     useEffect(() => {
         const doesPreviewExist = async (isbn) => {
             try {
-              const response = await axios.get('http://localhost:5000/previewExists', {
-                params: {
-                    isbn: isbn
-                }
-            });
+                const response = await axios.get('http://localhost:5000/previewExists', {
+                    params: {
+                        isbn: isbn
+                    }
+                });
+                setHasPreview(response.data);
+            } catch (error) {
+                console.error(error.message);
+            }
+        };
+        doesPreviewExist(isbn);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
-            console.log("Returning " + response.data);
-            setHasPreview(response.data);
-
-          } catch (error) {
-          console.error(error.message);
-        }
-    };
-
-    doesPreviewExist(isbn);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  useEffect(() => {
-    if (hasPreview) {
-        console.log("hasPreview changed to : " + hasPreview);
-    }
-
-  }, [hasPreview])
-
-  return (
-      <>
-         {hasPreview &&
-           <Col key={id}>
-                <img alt={title} src={img_url} />
-                <br/>
-                <span>{title} by {author}</span>
-                <BookViewer isbn={isbn} id={id} />
-            </Col>
-         }
-      </>
-  );
+    return (
+        <>
+            {hasPreview &&
+                <Col id={id}>
+                    <img alt={title} src={img_url}/>
+                    <br/>
+                    <span>{title} by {author}</span>
+                    <BookViewer isbn={isbn} id={id}/>
+                </Col>
+            }
+        </>
+    );
 
 }
 

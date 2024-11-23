@@ -3,43 +3,41 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 
 const BookViewer = ({isbn, id}) => {
-	const canvasRef = useRef();
-	const modalRef = useRef();
-	const [loaded, setLoaded] = useState(false);
-	const [show, setShow] = useState(false);
-	const handleClose = () => setShow(false);
-	const handleShow = () => setShow(true);
+    const canvasRef = useRef();
+    const modalRef = useRef();
+    const [loaded, setLoaded] = useState(false);
+    const [show, setShow] = useState(false);
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
 
-    useEffect(()=> {
-		if (!show) {
-		    return
-		}
-        else{
+    useEffect(() => {
+        if (!show) {
+            return
+        } else {
             window.viewer = new window.google.books.DefaultViewer(canvasRef.current);
-            window.viewer.load('ISBN:'+isbn);
+            window.viewer.load('ISBN:' + isbn);
             const canvas = document.getElementById("viewerCanvas-" + id);
             modalRef.current.appendChild(canvas);
             canvasRef.current.style.display = 'block';
         }
     }, [show])
 
-	useEffect(()=> {
-		const scriptTag = document.createElement('script')
-		scriptTag.src= 'https://www.google.com/books/jsapi.js'
-		scriptTag.addEventListener('load', ()=>setLoaded(true))
-		scriptTag.id = "google-script"
-		document.body.appendChild(scriptTag);
-	}, []);
+    useEffect(() => {
+        const scriptTag = document.createElement('script')
+        scriptTag.src = 'https://www.google.com/books/jsapi.js'
+        scriptTag.addEventListener('load', () => setLoaded(true))
+        scriptTag.id = "google-script"
+        document.body.appendChild(scriptTag);
+    }, []);
 
-	useEffect(()=> {
-		if (!loaded) {
-		    return
-		}
-        else{
-            window.google.books.setOnLoadCallback(() => {
-                let viewer = new window.google.books.DefaultViewer(canvasRef.current);
-                window.viewer = viewer
-            });
+    useEffect(() => {
+        if (!loaded) {
+            return
+        } else {
+            // window.google.books.setOnLoadCallback(() => {
+            //     let viewer = new window.google.books.DefaultViewer(canvasRef.current);
+            //     window.viewer = viewer
+            // });
             window.google.books.load();
         }
     }, [loaded])
@@ -56,7 +54,7 @@ const BookViewer = ({isbn, id}) => {
                 Preview
             </Button>
 
-           <Modal show={show} onHide={handleClose}>
+            <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
                     <Modal.Title>ISBN: {isbn}</Modal.Title>
                 </Modal.Header>
@@ -70,12 +68,8 @@ const BookViewer = ({isbn, id}) => {
                     </Button>
                 </Modal.Footer>
             </Modal>
-
             <div ref={canvasRef} id={`viewerCanvas-${id}`} style={divStyle}></div>
-
         </>
     )
-
 }
-
 export default BookViewer;

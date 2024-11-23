@@ -8,54 +8,52 @@ import Book from './Book.js';
 export default function Books() {
 
     const [allBooks, setAllBooks] = useState([]);
-
-  function parseBookData(input) {
-    let items = input.items;
-    let result = [];
-    let ctr = 0;
-    for (let i in items) {
-      let info = items[i].volumeInfo;
-      let isbn = info.industryIdentifiers[0].identifier;
-      let book = {};
-      book.id = ctr++;
-      book.title = info.title ? info.title : "";
-      book.author = info.authors ? info.authors[0] : "";
-      book.img_url = info.imageLinks && info.imageLinks.thumbnail ? info.imageLinks.thumbnail : "";
-      book.isbn = isbn;
-      result.push(book);
+    function parseBookData(input) {
+        let items = input.items;
+        let result = [];
+        let ctr = 0;
+        for (let i in items) {
+            let info = items[i].volumeInfo;
+            let isbn = info.industryIdentifiers[0].identifier;
+            let book = {};
+            book.id = ctr++;
+            book.title = info.title ? info.title : "";
+            book.author = info.authors ? info.authors[0] : "";
+            book.img_url = info.imageLinks && info.imageLinks.thumbnail ? info.imageLinks.thumbnail : "";
+            book.isbn = isbn;
+            result.push(book);
+        }
+        return result;
     }
-    return result;
-  }
 
-  useEffect(() => {
-    const fetchAllBooks = async () => {
-       try {
-        const response = await axios.get('http://localhost:5000/googlebooks', {
-          params: {
-            searchTerm: 'cats'
-          }
-        });
-
-        setAllBooks(parseBookData(response.data));
-
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    }
-    fetchAllBooks();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    useEffect(() => {
+        const fetchAllBooks = async () => {
+            try {
+                const response = await axios.get('http://localhost:5000/googlebooks', {
+                    params: {
+                        searchTerm: 'cats'
+                    }
+                });
+                setAllBooks(parseBookData(response.data));
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        }
+        fetchAllBooks();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
 
-  return (
-    <Container>
-      <Row>
-      {allBooks.map((book) => (
-        <Book title={book.title} author={book.author} isbn={book.isbn} img_url={book.img_url} id={book.id} />
-      ))}
-      </Row>
-    </Container>
-  );
+    return (
+        <Container>
+            <Row>
+                {allBooks.map((book, index) => (
+                    <Book title={book.title} author={book.author} isbn={book.isbn} img_url={book.img_url} key={index}
+                          id={book.id}/>
+                ))}
+            </Row>
+        </Container>
+    );
 }
 
 
