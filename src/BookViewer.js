@@ -21,14 +21,17 @@ const BookViewer = ({isbn, id}) => {
             modalRef.current.appendChild(canvas);
             canvasRef.current.style.display = 'block';
         }
+        // eslint-disable-next-line
     }, [show])
 
     useEffect(() => {
-        const scriptTag = document.createElement('script')
-        scriptTag.src = 'https://www.google.com/books/jsapi.js'
-        scriptTag.addEventListener('load', () => setLoaded(true))
-        scriptTag.id = "google-script"
-        document.body.appendChild(scriptTag);
+        if (document.getElementById("google-script") == null) {
+            const scriptTag = document.createElement('script')
+            scriptTag.src = 'https://www.google.com/books/jsapi.js'
+            scriptTag.addEventListener('load', () => setLoaded(true))
+            scriptTag.id = "google-script"
+            document.body.appendChild(scriptTag);
+        }
     }, []);
 
     useEffect(() => {
@@ -41,7 +44,7 @@ const BookViewer = ({isbn, id}) => {
 
     const divStyle = {
         height: '600px',
-        width: '470px',
+        // width: '200px',
         display: 'none'
     };
 
@@ -51,9 +54,11 @@ const BookViewer = ({isbn, id}) => {
                 <Image src="google_button.png" rounded />
             </Button>
 
-            <Modal show={show} onHide={handleClose}>
+
+            <Modal dialogClassName="modal-90w" show={show} onHide={handleClose}>
+
                 <Modal.Header closeButton>
-                    <Modal.Title>ISBN: {isbn}</Modal.Title>
+                    <Modal.Title></Modal.Title>
                 </Modal.Header>
 
                 <Modal.Body ref={modalRef}>
