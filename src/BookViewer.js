@@ -1,6 +1,7 @@
 import {useRef, useState, useEffect} from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import Image from 'react-bootstrap/Image';
 
 const BookViewer = ({isbn, id}) => {
     const canvasRef = useRef();
@@ -47,7 +48,7 @@ const BookViewer = ({isbn, id}) => {
     return (
         <>
             <Button variant="primary" onClick={handleShow}>
-                Preview
+                <Image src="google_button.png" rounded />
             </Button>
 
             <Modal show={show} onHide={handleClose}>
