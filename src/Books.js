@@ -31,7 +31,7 @@ export default function Books() {
             try {
                 const response = await axios.get('http://localhost:5000/googlebooks', {
                     params: {
-                        searchTerm: 'cats'
+                        searchTerm: 'new york times bestsellers'
                     }
                 });
                 setAllBooks(parseBookData(response.data));
