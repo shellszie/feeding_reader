@@ -6,7 +6,7 @@ function App() {
     return (
         <div className="App">
             <Image src="logo.png" className="logo" thumbnail />
-            <span class="feeding-reader">Feeding Reader</span>
+            <span className="feeding-reader">Feeding Reader</span>
             <Books/>
         </div>
     );
