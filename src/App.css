@@ -1,12 +1,17 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
+/*.App {*/
+/*  text-align: center;*/
+/*}*/
 .modal-90w {
   max-width: 90% !important;  /* Make sure the modal takes up 90% of the viewport width */
+}
+
+.logo {
+  height: 100px;
+  width: 100px;
+  border: none !important;
+}
+
+.feeding-reader {
+  font-size: clamp(2rem, 7vw, 3rem);
+  vertical-align: bottom;
 }
