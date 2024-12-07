@@ -4,7 +4,7 @@ import axios from 'axios';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Book from './Book.js';
-import {baseUrl} from './lib';
+import {baseNodeUrl} from './lib';
 
 export default function Books() {
 
@@ -30,7 +30,7 @@ export default function Books() {
     useEffect(() => {
         const fetchAllBooks = async () => {
             try {
-                const response = await axios.get(baseUrl() + '/googlebooks', {
+                const response = await axios.get(baseNodeUrl() + '/googlebooks', {
                     params: {
                         searchTerm: 'new york times bestsellers'
                     }

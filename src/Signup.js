@@ -1,5 +1,8 @@
 import React, {useState} from 'react';
 import {Button, Form} from "react-bootstrap";
+import {baseNodeUrl, baseRailsUrl, signup} from "./lib.js";
+import axios from "axios";
+
 
 export default function Signup() {
     const [email, setEmail] = useState('');
@@ -31,13 +34,34 @@ export default function Signup() {
          }
         return newErrors;
     };
-    const handleSubmit = (event) => {
+
+     const signup = async (email, password, passwordConfirmation) => {
+        try {
+            const response = await axios.post(baseRailsUrl() + '/signup', {
+                    email: email,
+                    password: password,
+                    password_confirmation: passwordConfirmation
+                });
+            console.log("response.data = " + response.data);
+            return response.data;
+        } catch (error) {
+            throw error;
+        }
+    }
+    const handleSubmit = async (event) => {
         event.preventDefault();
         const formErrors = validateForm();
         if (Object.keys(formErrors).length > 0) {
             setErrors(formErrors);
         } else {
             setErrors({});
+            try {
+                const userData = await signup(email, password, passwordConfirmation);
+                console.log('Signup successful:', userData);
+            }
+            catch (error) {
+                setErrors({ form: 'Signup failed. Please try again.' });
+            }
             console.log('Login attempted with:', { email, password });
             // Here you would typically send a request to your server
         }

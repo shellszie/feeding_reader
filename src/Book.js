@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import BookViewer from './BookViewer.js';
 import Col from 'react-bootstrap/Col';
-import {baseUrl} from './lib';
+import {baseNodeUrl} from './lib';
 
 const Book = ({isbn, title, author, img_url, id}) => {
 
@@ -11,7 +11,7 @@ const Book = ({isbn, title, author, img_url, id}) => {
     useEffect(() => {
         const doesPreviewExist = async (isbn) => {
             try {
-                const response = await axios.get(baseUrl() +'/previewExists', {
+                const response = await axios.get(baseNodeUrl() +'/previewExists', {
                     params: {
                         isbn: isbn
                     }

@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import { Form, Button, Container, Alert } from 'react-bootstrap';
+import {login} from './lib.js';
 
 export default function Login() {
     const [email, setEmail] = useState('');
@@ -23,13 +24,20 @@ export default function Login() {
         }
         return newErrors;
     };
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
         const formErrors = validateForm();
         if (Object.keys(formErrors).length > 0) {
             setErrors(formErrors);
         } else {
             setErrors({});
+            // try {
+            //     const userData = await login(email, password);
+            //     console.log('Login successful:', userData);
+            // }
+            // catch (error) {
+            //     setErrors({ form: 'Login failed. Please try again.' });
+            // }
             console.log('Login attempted with:', { email, password });
             // Here you would typically send a request to your server
         }
