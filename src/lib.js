@@ -16,8 +16,6 @@ export const baseRailsUrl = () => {
         // return "http://localhost:3001";
         return "http://localhost:3001";
     } else {
-        // console.log("process.env.NODE_ENV = " + process.env.NODE_ENV);
-        //TODO: update below URL to new heroku url after deploying rails app
         return "https://tranquil-oasis-66716-28841a8a86c6.herokuapp.com/";
     }
 }

@@ -2,9 +2,13 @@ import React, {useState} from 'react';
 import {Button, Form} from "react-bootstrap";
 import {baseNodeUrl, baseRailsUrl, signup} from "./lib.js";
 import axios from "axios";
+import {useNavigate} from 'react-router';
 
 
 export default function Signup() {
+
+    let navigate = useNavigate();
+
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [passwordConfirmation, setPasswordConfirmation] = useState('');
@@ -58,6 +62,7 @@ export default function Signup() {
             try {
                 const userData = await signup(email, password, passwordConfirmation);
                 console.log('Signup successful:', userData);
+                navigate("/");
             }
             catch (error) {
                 setErrors({ form: 'Signup failed. Please try again.' });
