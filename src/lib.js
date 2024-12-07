@@ -18,7 +18,7 @@ export const baseRailsUrl = () => {
     } else {
         // console.log("process.env.NODE_ENV = " + process.env.NODE_ENV);
         //TODO: update below URL to new heroku url after deploying rails app
-        return "replace this";
+        return "https://tranquil-oasis-66716-28841a8a86c6.herokuapp.com/";
     }
 }
 
