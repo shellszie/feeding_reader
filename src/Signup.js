@@ -67,7 +67,7 @@ export default function Signup() {
             catch (error) {
                 setErrors({ form: 'Signup failed. Please try again.' });
             }
-            console.log('Login attempted with:', { email, password });
+            console.log('Signup attempted with:', { email, password });
             // Here you would typically send a request to your server
         }
     };

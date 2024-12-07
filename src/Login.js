@@ -1,12 +1,14 @@
 import React, {useState} from 'react';
 import { Form, Button, Container, Alert } from 'react-bootstrap';
-import {login} from './lib.js';
+import {baseRailsUrl, login} from './lib.js';
+import axios from "axios";
+import {useNavigate} from "react-router";
 
 export default function Login() {
+    let navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [errors, setErrors] = useState({});
-
 
     const validateForm = () => {
         const newErrors = {};
@@ -24,6 +26,20 @@ export default function Login() {
         }
         return newErrors;
     };
+
+    const login = async (email, password) => {
+        try {
+            const response = await axios.post(baseRailsUrl() + '/login', {
+                email: email,
+                password: password
+            });
+            console.log("response.data = " + response.data);
+            return response.data;
+        } catch (error) {
+            throw error;
+        }
+    }
+
     const handleSubmit = async (event) => {
         event.preventDefault();
         const formErrors = validateForm();
@@ -31,13 +47,14 @@ export default function Login() {
             setErrors(formErrors);
         } else {
             setErrors({});
-            // try {
-            //     const userData = await login(email, password);
-            //     console.log('Login successful:', userData);
-            // }
-            // catch (error) {
-            //     setErrors({ form: 'Login failed. Please try again.' });
-            // }
+            try {
+                const userData = await login(email, password);
+                console.log('Login successful:', userData);
+                navigate("/");
+            }
+            catch (error) {
+                setErrors({ form: 'Login failed. Please try again.' });
+            }
             console.log('Login attempted with:', { email, password });
             // Here you would typically send a request to your server
         }
