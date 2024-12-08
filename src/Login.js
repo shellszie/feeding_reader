@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import { Form, Button, Container, Alert } from 'react-bootstrap';
-import {baseRailsUrl, login} from './lib.js';
+import {axiosRails, login} from './lib.js';
 import axios from "axios";
 import {useNavigate} from "react-router";
 
@@ -27,12 +27,15 @@ export default function Login() {
         return newErrors;
     };
 
+
     const login = async (email, password) => {
+
         try {
-            const response = await axios.post(baseRailsUrl() + '/login', {
+            const response = await axiosRails.post( '/login', {
                 email: email,
                 password: password
             });
+                // { withCredentials: true });
             console.log("response.data = " + response.data);
             return response.data;
         } catch (error) {
@@ -50,6 +53,7 @@ export default function Login() {
             try {
                 const userData = await login(email, password);
                 console.log('Login successful:', userData);
+                localStorage.setItem("jwt", userData.token);
                 navigate("/");
             }
             catch (error) {

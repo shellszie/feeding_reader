@@ -1,5 +1,22 @@
 import axios from 'axios';
 
+axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('jwt')}`;
+
+const baseRailsUrl = () => {
+    if (process.env.NODE_ENV === 'development') {
+        return "http://localhost:3001";
+    } else {
+        return "https://tranquil-oasis-66716-28841a8a86c6.herokuapp.com/";
+    }
+}
+
+export const axiosRails = axios.create({
+    baseURL: baseRailsUrl(),
+    headers: {
+        'Authorization': `Bearer ${localStorage.getItem('jwt')}`
+    }
+});
+
 export const baseNodeUrl = () => {
     if (process.env.NODE_ENV === 'development') {
         console.log("process.env.NODE_ENV = " + process.env.NODE_ENV);
@@ -10,15 +27,8 @@ export const baseNodeUrl = () => {
     }
 }
 
-export const baseRailsUrl = () => {
-    if (process.env.NODE_ENV === 'development') {
-        // console.log("process.env.NODE_ENV = " + process.env.NODE_ENV);
-        // return "http://localhost:3001";
-        return "http://localhost:3001";
-    } else {
-        return "https://tranquil-oasis-66716-28841a8a86c6.herokuapp.com/";
-    }
-}
+
+
 
 // const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
