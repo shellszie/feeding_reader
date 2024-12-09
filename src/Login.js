@@ -28,7 +28,6 @@ export default function Login() {
 
 
     const login = async (email, password) => {
-
         try {
             const response = await axiosRails.post( '/login', {
                 email: email,

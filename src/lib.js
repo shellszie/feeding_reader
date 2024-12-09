@@ -27,21 +27,3 @@ export const baseNodeUrl = () => {
     }
 }
 
-
-
-
-// const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-
-// export const login = async (email, password) => {
-//     try {
-//         const response = await axios.post(baseRailsUrl() + '/login', { email, password }, {
-//             headers: {
-//                 'X-CSRF-Token': csrfToken  // Include CSRF token in the request headers
-//             }
-//         });
-//         return response.data;
-//     } catch (error) {
-//         throw error;
-//     }
-// }
-
