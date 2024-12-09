@@ -5,6 +5,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Book from './Book.js';
 import {baseNodeUrl} from './lib';
+import SearchBox from "./SearchBox";
 
 export default function Books() {
 
@@ -47,6 +48,7 @@ export default function Books() {
 
     return (
         <Container className="pt-3">
+            <SearchBox />
             <Row>
                 {allBooks.map((book, index) => (
                     <Book title={book.title} author={book.author} isbn={book.isbn} img_url={book.img_url} key={index}
