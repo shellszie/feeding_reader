@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
-import { Form, Button, Container, Alert } from 'react-bootstrap';
-import {axiosRails, login} from './lib.js';
-import axios from "axios";
+import { Form, Button } from 'react-bootstrap';
+import {axiosRails} from './lib.js';
 import {useNavigate} from "react-router";
 
 export default function Login() {

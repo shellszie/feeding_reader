@@ -64,6 +64,7 @@ export default function Signup() {
                 const userData = await signup(email, password, passwordConfirmation);
                 console.log('Signup successful:', userData);
                 localStorage.setItem("jwt", userData.token);
+                localStorage.setItem("email", userData.user.email);
                 navigate("/");
             }
             catch (error) {
