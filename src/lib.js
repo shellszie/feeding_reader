@@ -10,14 +10,7 @@ const baseRailsUrl = () => {
     }
 }
 
-export const axiosRails = axios.create({
-    baseURL: baseRailsUrl(),
-    headers: {
-        'Authorization': `Bearer ${localStorage.getItem('jwt')}`
-    }
-});
-
-export const baseNodeUrl = () => {
+const baseNodeUrl = () => {
     if (process.env.NODE_ENV === 'development') {
         console.log("process.env.NODE_ENV = " + process.env.NODE_ENV);
         return "http://localhost:5000";
@@ -26,4 +19,17 @@ export const baseNodeUrl = () => {
         return "https://intense-beyond-88293-6a4d48fa1f58.herokuapp.com";
     }
 }
+
+export const axiosNode = axios.create({
+    baseURL: baseNodeUrl()
+});
+
+export const axiosRails = axios.create({
+    baseURL: baseRailsUrl(),
+    headers: {
+        'Authorization': `Bearer ${localStorage.getItem('jwt')}`
+    }
+});
+
+
 

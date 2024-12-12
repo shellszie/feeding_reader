@@ -4,7 +4,7 @@ import axios from 'axios';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Book from './Book.js';
-import {baseNodeUrl} from './lib';
+import {axiosNode} from './lib';
 import SearchBox from "./SearchBox";
 
 export default function Books() {
@@ -16,14 +16,18 @@ export default function Books() {
         let ctr = 0;
         for (let i in items) {
             let info = items[i].volumeInfo;
-            let isbn = info.industryIdentifiers[0].identifier;
-            let book = {};
-            book.id = ctr++;
-            book.title = info.title ? info.title : "";
-            book.author = info.authors ? info.authors[0] : "";
-            book.img_url = info.imageLinks && info.imageLinks.thumbnail ? info.imageLinks.thumbnail : "";
-            book.isbn = isbn;
-            result.push(book);
+            if (info.industryIdentifiers && info.industryIdentifiers[0] && info.industryIdentifiers[0].identifier) {
+                let book = {};
+                book.id = ctr++;
+                book.title = info.title ? info.title : "";
+                book.author = info.authors ? info.authors[0] : "";
+                book.img_url = info.imageLinks && info.imageLinks.thumbnail ? info.imageLinks.thumbnail : "";
+                book.isbn = info.industryIdentifiers[0].identifier;
+                result.push(book);
+            }
+            else {
+                continue
+            }
         }
         return result;
     }
@@ -31,7 +35,7 @@ export default function Books() {
     useEffect(() => {
         const fetchAllBooks = async () => {
             try {
-                const response = await axios.get(baseNodeUrl() + '/googlebooks', {
+                const response = await axiosNode.get('/googlebooks', {
                     params: {
                         searchTerm: 'new york times bestsellers'
                     }
@@ -48,7 +52,7 @@ export default function Books() {
 
     return (
         <Container className="pt-3">
-            <SearchBox />
+            {/*<SearchBox allBooks={allBooks} parseBookData={parseBookData} />*/}
             <Row>
                 {allBooks.map((book, index) => (
                     <Book title={book.title} author={book.author} isbn={book.isbn} img_url={book.img_url} key={index}

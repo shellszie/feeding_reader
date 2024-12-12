@@ -1,11 +1,12 @@
 import React, {useState} from 'react';
 import {Button, Form} from "react-bootstrap";
-import {axiosRails} from "./lib";
+import {axiosNode, axiosRails} from "./lib";
 
-export default function SearchBox() {
+export default function SearchBox({allBooks, parseBookData}) {
 
     const [searchTerm, setSearchTerm] = useState('');
     const [error, setError] = useState('');
+    // const [allBooks, setAllBooks] = useState(allBooks);
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -16,6 +17,7 @@ export default function SearchBox() {
             setError('');
             try {
                 const searchResults = await doSearch();
+                console.log("searchResults = " + searchResults);
             }
             catch (error) {
                 console.log("search failed");
@@ -29,16 +31,24 @@ export default function SearchBox() {
               const response = await axiosRails.post( '/saveSearchTerm', {
                   searchTerm: searchTerm
               });
-              // { withCredentials: true });
-              console.log("response.data = " + response.data);
-              // return response.data;
+              console.log("response.data = " + response.data.items);
+              // setAllBooks(parseBookData(response.data.items));
           } catch (error) {
               throw error;
           }
 
           try {
-              //ping node api for search results
+              const response = await axiosNode.get('/googlebooks', {
+                  params: {
+                  searchTerm: searchTerm
+                }
+              });
+              console.log("response from google books = " + response.data);
+              // setAllBooks(parseBookData(response.data));
+          } catch (error) {
+              console.error('Error fetching data:', error);
           }
+
       }
 
 
