@@ -32,27 +32,28 @@ export default function Books() {
         return result;
     }
 
-    useEffect(() => {
-        const fetchAllBooks = async () => {
-            try {
-                const response = await axiosNode.get('/googlebooks', {
-                    params: {
-                        searchTerm: 'new york times bestsellers'
-                    }
-                });
-                setAllBooks(parseBookData(response.data));
-            } catch (error) {
-                console.error('Error fetching data:', error);
-            }
+
+    const fetchAllBooks = async (searchTerm) => {
+        try {
+            const response = await axiosNode.get('/googlebooks', {
+                params: {
+                    searchTerm: searchTerm
+                }
+            });
+            setAllBooks(parseBookData(response.data));
+        } catch (error) {
+            console.error('Error fetching data:', error);
         }
-        fetchAllBooks();
+    }
+
+    useEffect(() => {
+        fetchAllBooks('new york times bestsellers');
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-
     return (
         <Container className="pt-3">
-            {/*<SearchBox allBooks={allBooks} parseBookData={parseBookData} />*/}
+            <SearchBox fetchAllbooks={fetchAllBooks} />
             <Row>
                 {allBooks.map((book, index) => (
                     <Book title={book.title} author={book.author} isbn={book.isbn} img_url={book.img_url} key={index}
