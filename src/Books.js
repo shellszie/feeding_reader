@@ -55,7 +55,7 @@ export default function Books() {
         <>
             <div className="heading-wrapper">
                 <div className="feeding-reader">Feeding Reader</div>
-                <div>
+                <div className="mt-3">
                     <div>Welcome {localStorage.getItem('email')}</div>
                     <Logout/>
                 </div>
