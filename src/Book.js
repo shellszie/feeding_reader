@@ -56,7 +56,7 @@ const Book = ({isbn, title, author, img_url, id}) => {
                             <i className="fa-solid fa-floppy-disk fa-2xl"></i>
                         </Button>
                     </div>
-                    <div>
+                    <div className="center-text">
                         {confirm}
                     </div>
                 </Col>
