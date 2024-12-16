@@ -52,6 +52,7 @@ export default function Login() {
                 const userData = await login(email, password);
                 console.log('Login successful:', userData);
                 localStorage.setItem("jwt", userData.token);
+                localStorage.setItem('email', userData.user.email);
                 navigate("/");
             }
             catch (error) {
@@ -65,7 +66,7 @@ export default function Login() {
     return (
         <div className="login-wrapper">
             <div className="login-form-container">
-                <h2 className="login-title">Login</h2>
+                <h2 className="login-title">Log In</h2>
                 <Form onSubmit={handleSubmit}>
                     <Form.Group className="mb-3" controlId="formBasicEmail">
                         <Form.Label>Email address</Form.Label>

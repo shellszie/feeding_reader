@@ -26,7 +26,7 @@ function App() {
         <div className="App">
 
             <span className="feeding-reader">Feeding Reader</span>
-            <span>Welcome {localStorage.getItem('email')}</span>
+
             <BrowserRouter>
                 <Routes>
                     {/*<Route path="/" element={<Books />} />*/}

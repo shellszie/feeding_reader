@@ -54,7 +54,8 @@ export default function Books() {
 
     return (
         <Container className="pt-3">
-            <Logout />
+            <span>Welcome {localStorage.getItem('email')}</span>
+            <Logout/>
             <SearchBox fetchAllbooks={fetchAllBooks} />
             <Row>
                 {allBooks.map((book, index) => (

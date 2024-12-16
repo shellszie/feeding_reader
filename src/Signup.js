@@ -127,7 +127,7 @@ export default function Signup() {
                         Sign Up
                     </Button>
                     <div className="mt-3">
-                        <small>Already have an account? <Link to="/login">Login</Link></small>
+                        <small>Already have an account? <Link to="/login">Log In</Link></small>
                     </div>
                 </Form>
             </div>
