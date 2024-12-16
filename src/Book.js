@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import BookViewer from './BookViewer.js';
 import Col from 'react-bootstrap/Col';
-import {axiosNode} from './lib';
+import {axiosNode, axiosRails} from './lib';
 import Button from "react-bootstrap/Button";
 
 const Book = ({isbn, title, author, img_url, id}) => {
@@ -26,8 +26,17 @@ const Book = ({isbn, title, author, img_url, id}) => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    const handleSave = (id) => {
-
+    const handleSave = async (title, author, isbn, img_url) => {
+        try {
+            const response = await axiosRails.post( '/saveBook', {
+                title: title,
+                author: author,
+                isbn: isbn,
+                img_url: img_url
+            });
+        } catch (error) {
+            throw error;
+        }
     }
 
     return (
@@ -40,7 +49,7 @@ const Book = ({isbn, title, author, img_url, id}) => {
                     <span>{title} by {author}</span>
                     <BookViewer isbn={isbn} id={id}/>
                     <div className="center-text">
-                        <Button variant="" onClick={()=>handleSave(id)}>
+                        <Button variant="" onClick={()=>handleSave(title, author, isbn, img_url)}>
                             <i className="fa-solid fa-floppy-disk fa-2xl"></i>
                         </Button>
                     </div>
