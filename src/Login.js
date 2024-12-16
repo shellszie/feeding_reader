@@ -62,7 +62,7 @@ export default function Login() {
 
     return (
         <>
-            <div className="feeding-reader">
+            <div className="feeding-reader center-text">
                 Feeding Reader
             </div>
             <div className="login-wrapper">

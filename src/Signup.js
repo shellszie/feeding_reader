@@ -77,7 +77,7 @@ export default function Signup() {
 
     return (
         <>
-            <div className="feeding-reader">Feeding Reader</div>
+            <div className="feeding-reader center-text">Feeding Reader</div>
               <div className="login-wrapper">
                  <div className="login-form-container">
                     <h2 className="login-title">Sign Up</h2>
