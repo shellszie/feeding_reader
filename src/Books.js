@@ -54,7 +54,8 @@ export default function Books() {
         <>
             <div className="heading-wrapper">
                 <div className="feeding-reader">
-                    <img alt="Feeding Reader Book Previews" src="logo_50x50.png" className="m-2" />Feeding Reader
+                    <img alt="Feeding Reader Book Previews" src="logo_50x50.png" className="logo" />&nbsp;
+                    <span>Feeding Reader</span>
                 </div>
                 <div className="mt-3">
                     <div>Welcome {localStorage.getItem('email')}</div>
