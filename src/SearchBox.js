@@ -43,8 +43,8 @@ export default function SearchBox({fetchAllbooks}) {
 
     return (
 
-        <Form onSubmit={handleSubmit} className="mb-3 mt-3 center-text">
-            <Form.Group className="mb-3" controlId="searchTerm">
+        <Form onSubmit={handleSubmit} className="mb-5 mt-3 center-text">
+            <Form.Group controlId="searchTerm">
                 <Form.Control
                     type="text"
                     placeholder="NY Times Best Sellers"
