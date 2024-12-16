@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {Button, Form} from "react-bootstrap";
 import {baseNodeUrl, baseRailsUrl, signup, axiosRails} from "./lib.js";
 import axios from "axios";
-import {useNavigate} from 'react-router';
+import {useNavigate, Link} from 'react-router';
 
 
 export default function Signup() {
@@ -126,6 +126,9 @@ export default function Signup() {
                     <Button variant="primary" type="submit" className="w-100">
                         Sign Up
                     </Button>
+                    <div className="mt-3">
+                        <small>Already have an account? <Link to="/login">Login</Link></small>
+                    </div>
                 </Form>
             </div>
         </div>

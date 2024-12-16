@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import { Form, Button } from 'react-bootstrap';
 import {axiosRails} from './lib.js';
-import {useNavigate} from "react-router";
+import {Link, useNavigate} from "react-router";
 
 export default function Login() {
     let navigate = useNavigate();
@@ -98,6 +98,10 @@ export default function Login() {
                     <Button variant="primary" type="submit" className="w-100">
                         Login
                     </Button>
+
+                    <div className="mt-3">
+                        <small>Don't have an account? <Link to="/signup">Sign Up</Link></small>
+                    </div>
                 </Form>
             </div>
         </div>
