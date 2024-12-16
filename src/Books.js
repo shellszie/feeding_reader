@@ -1,7 +1,5 @@
 import React from 'react';
 import {useState, useEffect} from 'react';
-import axios from 'axios';
-import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Book from './Book.js';
 import {axiosNode} from './lib';

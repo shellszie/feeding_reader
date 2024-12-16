@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {Button, Form} from "react-bootstrap";
-import {axiosNode, axiosRails} from "./lib";
+import {axiosRails} from "./lib";
 
 export default function SearchBox({fetchAllbooks}) {
 

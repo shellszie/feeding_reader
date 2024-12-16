@@ -1,5 +1,4 @@
 import {Link, useNavigate} from "react-router";
-import Login from './Login.js';
 export default function Logout() {
 
     let navigate = useNavigate();

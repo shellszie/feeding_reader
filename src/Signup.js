@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 import {Button, Form} from "react-bootstrap";
-import {baseNodeUrl, baseRailsUrl, signup, axiosRails} from "./lib.js";
-import axios from "axios";
+import {axiosRails} from "./lib.js";
 import {useNavigate, Link} from 'react-router';
 
 
