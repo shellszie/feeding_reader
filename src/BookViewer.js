@@ -50,7 +50,7 @@ const BookViewer = ({isbn, id}) => {
 
     return (
         <>
-            <Button variant="primary" onClick={handleShow}>
+            <Button variant="" onClick={handleShow}>
                 <Image src="google_button.png" rounded />
             </Button>
 
