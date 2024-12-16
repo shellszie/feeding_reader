@@ -17,8 +17,9 @@ function App() {
         if (!jwt) {
             return <Navigate to={redirectPath} replace />;
         }
-
-        return children ? children : <Outlet />;
+        else {
+           return children;
+        }
     };
 
     return (
