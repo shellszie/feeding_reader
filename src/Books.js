@@ -6,6 +6,7 @@ import Row from 'react-bootstrap/Row';
 import Book from './Book.js';
 import {axiosNode} from './lib';
 import SearchBox from "./SearchBox";
+import Logout from "./Logout";
 
 export default function Books() {
 
@@ -53,6 +54,7 @@ export default function Books() {
 
     return (
         <Container className="pt-3">
+            <Logout />
             <SearchBox fetchAllbooks={fetchAllBooks} />
             <Row>
                 {allBooks.map((book, index) => (
