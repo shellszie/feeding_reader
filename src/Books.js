@@ -33,7 +33,6 @@ export default function Books() {
         return result;
     }
 
-
     const fetchAllBooks = async (searchTerm) => {
         try {
             const response = await axiosNode.get('/googlebooks', {
@@ -53,17 +52,23 @@ export default function Books() {
     }, []);
 
     return (
-        <Container className="pt-3">
-            <span>Welcome {localStorage.getItem('email')}</span>
-            <Logout/>
-            <SearchBox fetchAllbooks={fetchAllBooks} />
+        <>
+            <div className="heading-wrapper">
+                <div className="feeding-reader">Feeding Reader</div>
+                <div>
+                    <div>Welcome {localStorage.getItem('email')}</div>
+                    <Logout/>
+                </div>
+            </div>
+
+            <SearchBox fetchAllbooks={fetchAllBooks}/>
             <Row>
                 {allBooks.map((book, index) => (
                     <Book title={book.title} author={book.author} isbn={book.isbn} img_url={book.img_url} key={index}
                           id={book.id}/>
                 ))}
             </Row>
-        </Container>
+        </>
     );
 }
 

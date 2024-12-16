@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from "react-router";
 import Signup from './Signup.js';
 import Login from './Login.js';
 import {Navigate, Outlet} from 'react-router';
+import {Container, Row} from 'react-bootstrap';
 
 
 
@@ -23,10 +24,7 @@ function App() {
     };
 
     return (
-        <div className="App">
-
-            <span className="feeding-reader">Feeding Reader</span>
-
+        <Container>
             <BrowserRouter>
                 <Routes>
                     {/*<Route path="/" element={<Books />} />*/}
@@ -42,7 +40,7 @@ function App() {
                     />
                 </Routes>
             </BrowserRouter>
-        </div>
+        </Container>
     );
 }
 
