@@ -41,35 +41,32 @@ export default function SearchBox({fetchAllbooks}) {
 
       }
 
-
-
     return (
-        // <form>
-        //
-        //     <div className="form-group">
-        //
-        //         <input type="text" className="form-control" id="searchTerm" placeholder="NY Times Bestsellers"/>
-        //     </div>
-        //
-        //     <button type="submit" className="btn btn-primary">Search</button>
-        // </form>
-        <Form onSubmit={handleSubmit}>
+
+        <Form onSubmit={handleSubmit} className="mb-3 mt-3 center-text">
             <Form.Group className="mb-3" controlId="searchTerm">
                 <Form.Control
                     type="text"
                     placeholder="NY Times Best Sellers"
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
-                    // isInvalid={!!errors.search}
+                    className="my-form"
                 />
+                <Button variant="primary" type="submit" className="">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                         className="bi bi-search"
+                         viewBox="0 0 16 16">
+                        <path
+                            d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+                    </svg>
+                </Button>
                 <div className="error">
                     {error}
                 </div>
             </Form.Group>
 
-            <Button variant="primary" type="submit" className="w-100">
-                Search
-            </Button>
+
+
         </Form>
     );
 }

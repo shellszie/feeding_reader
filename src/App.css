@@ -46,3 +46,8 @@
 .error {
   color: red;
 }
+
+.my-form {
+  display: inline !important;
+  width: 50% !important;
+}
