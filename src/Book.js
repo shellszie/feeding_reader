@@ -3,6 +3,7 @@ import axios from 'axios';
 import BookViewer from './BookViewer.js';
 import Col from 'react-bootstrap/Col';
 import {axiosNode} from './lib';
+import Button from "react-bootstrap/Button";
 
 const Book = ({isbn, title, author, img_url, id}) => {
 
@@ -25,14 +26,24 @@ const Book = ({isbn, title, author, img_url, id}) => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
+    const handleSave = (id) => {
+
+    }
+
     return (
         <>
             {hasPreview &&
                 <Col id={id}>
+
                     <img alt={title} src={img_url}/>
                     <br/>
                     <span>{title} by {author}</span>
                     <BookViewer isbn={isbn} id={id}/>
+                    <div className="center-text">
+                        <Button variant="" onClick={()=>handleSave(id)}>
+                            <i className="fa-solid fa-floppy-disk fa-2xl"></i>
+                        </Button>
+                    </div>
                 </Col>
             }
         </>

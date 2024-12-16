@@ -12,7 +12,6 @@ const baseRailsUrl = () => {
 
 const baseNodeUrl = () => {
     if (process.env.NODE_ENV === 'development') {
-        console.log("process.env.NODE_ENV = " + process.env.NODE_ENV);
         return "http://localhost:5000";
     } else {
         console.log("process.env.NODE_ENV = " + process.env.NODE_ENV);

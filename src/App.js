@@ -5,8 +5,7 @@ import Signup from './Signup.js';
 import Login from './Login.js';
 import {Navigate} from 'react-router';
 import {Container} from 'react-bootstrap';
-
-
+import SavedBooks from "./SavedBooks";
 
 function App() {
 
@@ -35,6 +34,14 @@ function App() {
                         element={
                             <ProtectedRoute jwt={localStorage.getItem('jwt')}>
                                 <Books />
+                            </ProtectedRoute>
+                        }
+                    />
+                    <Route
+                        path="/saved"
+                        element={
+                            <ProtectedRoute jwt={localStorage.getItem('jwt')}>
+                                <SavedBooks />
                             </ProtectedRoute>
                         }
                     />

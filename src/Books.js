@@ -5,6 +5,7 @@ import Book from './Book.js';
 import {axiosNode} from './lib';
 import SearchBox from "./SearchBox";
 import Logout from "./Logout";
+import {Link} from "react-router";
 
 export default function Books() {
 
@@ -52,7 +53,9 @@ export default function Books() {
     return (
         <>
             <div className="heading-wrapper">
-                <div className="feeding-reader">Feeding Reader</div>
+                <div className="feeding-reader">
+                    <img alt="Feeding Reader Book Previews" src="logo_50x50.png" className="m-2" />Feeding Reader
+                </div>
                 <div className="mt-3">
                     <div>Welcome {localStorage.getItem('email')}</div>
                     <Logout/>
@@ -60,6 +63,11 @@ export default function Books() {
             </div>
 
             <SearchBox fetchAllbooks={fetchAllBooks}/>
+
+            <div className="right-text">
+                <Link to="/saved" >My Saved Books</Link>
+            </div>
+
             <Row>
                 {allBooks.map((book, index) => (
                     <Book title={book.title} author={book.author} isbn={book.isbn} img_url={book.img_url} key={index}
