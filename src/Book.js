@@ -8,6 +8,7 @@ import Button from "react-bootstrap/Button";
 const Book = ({isbn, title, author, img_url, id}) => {
 
     const [hasPreview, setHasPreview] = useState(false);
+    const [confirm, setConfirm] = useState("");
 
     useEffect(() => {
         const doesPreviewExist = async (isbn) => {
@@ -23,8 +24,9 @@ const Book = ({isbn, title, author, img_url, id}) => {
             }
         };
         doesPreviewExist(isbn);
+        setConfirm("");
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    }, [isbn]);
 
     const handleSave = async (title, author, isbn, img_url) => {
         try {
@@ -34,6 +36,7 @@ const Book = ({isbn, title, author, img_url, id}) => {
                 isbn: isbn,
                 img_url: img_url
             });
+            setConfirm("Saved");
         } catch (error) {
             throw error;
         }
@@ -52,6 +55,9 @@ const Book = ({isbn, title, author, img_url, id}) => {
                         <Button variant="" onClick={()=>handleSave(title, author, isbn, img_url)}>
                             <i className="fa-solid fa-floppy-disk fa-2xl"></i>
                         </Button>
+                    </div>
+                    <div>
+                        {confirm}
                     </div>
                 </Col>
             }
