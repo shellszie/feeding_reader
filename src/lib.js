@@ -30,5 +30,10 @@ export const axiosRails = axios.create({
     }
 });
 
+export const removeElt = (inputArr, id) => {
+    const result = inputArr.filter((elt) => elt.id !== id);
+    return result;
+}
+
 
 

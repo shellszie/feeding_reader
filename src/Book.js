@@ -5,7 +5,7 @@ import Col from 'react-bootstrap/Col';
 import {axiosNode, axiosRails} from './lib';
 import Button from "react-bootstrap/Button";
 
-const Book = ({isbn, title, author, img_url, id, isSaved}) => {
+const Book = ({isbn, title, author, img_url, id, isSaved, handleDelete}) => {
 
     const [hasPreview, setHasPreview] = useState(false);
     const [confirm, setConfirm] = useState("");
@@ -46,7 +46,9 @@ const Book = ({isbn, title, author, img_url, id, isSaved}) => {
         <>
             {hasPreview &&
                 <Col id={id}>
-
+                    <div className="mb-1 right-text" onClick={() => handleDelete(isbn, id)}>
+                        <i className="fa-solid fa-circle-xmark fa-2xl"></i>
+                    </div>
                     <img alt={title} src={img_url}/>
                     <br/>
                     <span>{title} by {author}</span>
@@ -54,7 +56,7 @@ const Book = ({isbn, title, author, img_url, id, isSaved}) => {
                     {!isSaved &&
                         <>
                             <div className="center-text">
-                                <Button variant="" onClick={()=>handleSave(title, author, isbn, img_url)}>
+                                <Button variant="" onClick={() => handleSave(title, author, isbn, img_url)}>
                                     <i className="fa-solid fa-floppy-disk fa-2xl"></i>
                                 </Button>
                             </div>
