@@ -16,7 +16,8 @@ export default function Books() {
         let ctr = 0;
         for (let i in items) {
             let info = items[i].volumeInfo;
-            if (info.industryIdentifiers && info.industryIdentifiers[0] && info.industryIdentifiers[0].identifier) {
+            if (info.industryIdentifiers && info.industryIdentifiers[0] && info.industryIdentifiers[0].identifier &&
+            info.imageLinks && info.imageLinks.thumbnail && info.title && info.authors && info.authors[0]) {
                 let book = {};
                 book.id = ctr++;
                 book.title = info.title ? info.title : "";
