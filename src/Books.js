@@ -72,7 +72,7 @@ export default function Books() {
             <Row>
                 {allBooks.map((book, index) => (
                     <Book title={book.title} author={book.author} isbn={book.isbn} img_url={book.img_url} key={index}
-                          id={book.id}/>
+                          id={book.id} isSaved={false} />
                 ))}
             </Row>
         </>
