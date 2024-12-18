@@ -80,58 +80,58 @@ export default function Signup() {
               <div className="login-wrapper">
                  <div className="login-form-container">
                     <h2 className="login-title">Sign Up</h2>
-                    <Form onSubmit={handleSubmit}>
-                        <Form.Group className="mb-3" controlId="formBasicEmail">
-                            <Form.Label>Email address</Form.Label>
-                            <Form.Control
-                                type="email"
-                                placeholder="Enter email"
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)}
-                                isInvalid={!!errors.email}
-                            />
-                            <Form.Control.Feedback type="invalid">
-                                {errors.email}
-                            </Form.Control.Feedback>
-                        </Form.Group>
+                     <Form onSubmit={handleSubmit}>
+                         <Form.Group className="mb-3" controlId="formBasicEmail">
+                             <Form.Label>Email address</Form.Label>
+                             <Form.Control
+                                 type="email"
+                                 placeholder="Enter email"
+                                 value={email}
+                                 onChange={(e) => setEmail(e.target.value)}
+                                 isInvalid={!!errors.email}
+                             />
+                             <Form.Control.Feedback type="invalid">
+                                 {errors.email}
+                             </Form.Control.Feedback>
+                         </Form.Group>
 
-                        <Form.Group className="mb-3" controlId="formBasicPassword">
-                            <Form.Label>Password</Form.Label>
-                            <Form.Control
-                                type="password"
-                                placeholder="Password"
-                                value={password}
-                                onChange={(e) => setPassword(e.target.value)}
-                                isInvalid={!!errors.password}
-                            />
-                            <Form.Control.Feedback type="invalid">
-                                {errors.password}
-                            </Form.Control.Feedback>
-                        </Form.Group>
+                         <Form.Group className="mb-3" controlId="formBasicPassword">
+                             <Form.Label>Password</Form.Label>
+                             <Form.Control
+                                 type="password"
+                                 placeholder="Password"
+                                 value={password}
+                                 onChange={(e) => setPassword(e.target.value)}
+                                 isInvalid={!!errors.password}
+                             />
+                             <Form.Control.Feedback type="invalid">
+                                 {errors.password}
+                             </Form.Control.Feedback>
+                         </Form.Group>
 
-                        <Form.Group className="mb-3" controlId="formBasicPasswordConfirmation">
-                            <Form.Label>Password Confirmation</Form.Label>
-                            <Form.Control
-                                type="password"
-                                placeholder="Password Confirmation"
-                                value={passwordConfirmation}
-                                onChange={(e) => setPasswordConfirmation(e.target.value)}
-                                isInvalid={!!errors.passwordConfirmation}
-                            />
-                            <Form.Control.Feedback type="invalid">
-                                {errors.passwordConfirmation}
-                            </Form.Control.Feedback>
-                        </Form.Group>
+                         <Form.Group className="mb-3" controlId="formBasicPasswordConfirmation">
+                             <Form.Label>Password Confirmation</Form.Label>
+                             <Form.Control
+                                 type="password"
+                                 placeholder="Password Confirmation"
+                                 value={passwordConfirmation}
+                                 onChange={(e) => setPasswordConfirmation(e.target.value)}
+                                 isInvalid={!!errors.passwordConfirmation}
+                             />
+                             <Form.Control.Feedback type="invalid">
+                                 {errors.passwordConfirmation}
+                             </Form.Control.Feedback>
+                         </Form.Group>
 
-                        <Button variant="primary" type="submit" className="w-100">
-                            Sign Up
-                        </Button>
-                        <div className="mt-3">
-                            <small>Already have an account? <Link to="/login">Log In</Link></small>
-                        </div>
-                    </Form>
-                </div>
-            </div>
+                         <Button variant="primary" type="submit" className="w-100">
+                             Sign Up
+                         </Button>
+                         <div className="mt-3">
+                             <small>Already have an account? <Link to="/login">Log In</Link></small>
+                         </div>
+                     </Form>
+                 </div>
+              </div>
         </>
     );
 }
