@@ -1,10 +1,10 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Button, Form} from "react-bootstrap";
-import {axiosRails} from "./lib.js";
+import {axiosNode, axiosRails} from "./lib.js";
 import {useNavigate, Link} from 'react-router';
 
 
-export default function Signup() {
+export default function Signup({pw_reset}) {
 
     let navigate = useNavigate();
 
@@ -12,6 +12,14 @@ export default function Signup() {
     const [password, setPassword] = useState('');
     const [passwordConfirmation, setPasswordConfirmation] = useState('');
     const [errors, setErrors] = useState({});
+
+    useEffect(() => {
+        if (pw_reset) {
+            setEmail(localStorage.getItem('email'));
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
 
     const validateForm = () => {
         const newErrors = {};
@@ -52,6 +60,20 @@ export default function Signup() {
             throw error;
         }
     }
+
+    const update_pw = async (email, password, passwordConfirmation) => {
+        try {
+            const response = await axiosRails.put('/update_pw', {
+                    email: email,
+                    password: password,
+                    password_confirmation: passwordConfirmation
+                }
+            );
+            return response.data;
+        } catch (error) {
+            throw error;
+        }
+    }
     const handleSubmit = async (event) => {
         event.preventDefault();
         const formErrors = validateForm();
@@ -60,17 +82,22 @@ export default function Signup() {
         } else {
             setErrors({});
             try {
-                const userData = await signup(email, password, passwordConfirmation);
-                console.log('Signup successful:', userData);
-                localStorage.setItem("jwt", userData.token);
-                localStorage.setItem("email", userData.user.email);
+                let userData = null;
+                if (pw_reset) {
+                    userData = await update_pw(email, password, passwordConfirmation);
+                    localStorage.setItem("jwt", userData)
+                }
+                else {
+                    userData = await signup(email, password, passwordConfirmation);
+                    localStorage.setItem("email", userData.user.email);
+                    localStorage.setItem("jwt", userData.token)
+                }
                 navigate("/");
             }
             catch (error) {
                 setErrors({ form: 'Signup failed. Please try again.' });
             }
             console.log('Signup attempted with:', { email, password });
-            // Here you would typically send a request to your server
         }
     };
 
@@ -81,19 +108,23 @@ export default function Signup() {
                  <div className="login-form-container">
                     <h2 className="login-title">Sign Up</h2>
                      <Form onSubmit={handleSubmit}>
-                         <Form.Group className="mb-3" controlId="formBasicEmail">
-                             <Form.Label>Email address</Form.Label>
-                             <Form.Control
-                                 type="email"
-                                 placeholder="Enter email"
-                                 value={email}
-                                 onChange={(e) => setEmail(e.target.value)}
-                                 isInvalid={!!errors.email}
-                             />
-                             <Form.Control.Feedback type="invalid">
-                                 {errors.email}
-                             </Form.Control.Feedback>
-                         </Form.Group>
+
+                         {
+                             !pw_reset &&
+                             <Form.Group className="mb-3" controlId="formBasicEmail">
+                                 <Form.Label>Email address</Form.Label>
+                                 <Form.Control
+                                     type="email"
+                                     placeholder="Enter email"
+                                     value={email}
+                                     onChange={(e) => setEmail(e.target.value)}
+                                     isInvalid={!!errors.email}
+                                 />
+                                 <Form.Control.Feedback type="invalid">
+                                     {errors.email}
+                                 </Form.Control.Feedback>
+                             </Form.Group>
+                         }
 
                          <Form.Group className="mb-3" controlId="formBasicPassword">
                              <Form.Label>Password</Form.Label>

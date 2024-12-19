@@ -28,10 +28,11 @@ function App() {
         <Container>
             <BrowserRouter>
                 <Routes>
-                    <Route path="/signup" element={<Signup />} />
+                    <Route path="/signup" element={<Signup pw_reset={false}/>} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/verify" element={<Verify />} />
                     <Route path="/code" element={<Code />} />
+                    <Route path="/update_pw" element={<Signup pw_reset={true} />} />
                     <Route
                         path="/"
                         element={
