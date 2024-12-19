@@ -19,6 +19,19 @@ const Verify = () => {
         }
         return newErrors;
     };
+
+    const verify = async (email) => {
+        try {
+            const response = await axiosRails.post('/verify', {
+                email: email
+            });
+            console.log("response.data = " + response.data);
+            return response.data;
+        } catch (error) {
+            throw error;
+        }
+    }
+
     const handleSubmit = async (event) => {
         event.preventDefault();
         const formErrors = validateForm();
@@ -27,16 +40,11 @@ const Verify = () => {
         } else {
             setErrors({});
             try {
-                // const userData = await login(email, password);
-                // console.log('Login successful:', userData);
-                // localStorage.setItem("jwt", userData.token);
-                // localStorage.setItem('email', userData.user.email);
-                navigate("/");
+                const userData = await verify(email);
+                navigate("/code");
             } catch (error) {
                 setErrors({form: 'Login failed. Please try again.'});
             }
-
-            // Here you would typically send a request to your server
         }
     };
 
