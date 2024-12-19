@@ -13,7 +13,7 @@ function App() {
 
     const ProtectedRoute = ({children}) => {
         if (!localStorage.getItem('jwt')) {
-            return <Navigate to="/" replace />;
+            return <Navigate to="/login" replace />;
         }
         else {
            return children;
