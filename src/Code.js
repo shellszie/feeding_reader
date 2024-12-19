@@ -4,29 +4,29 @@ import {axiosRails} from './lib.js';
 import {Link, useNavigate} from "react-router";
 
 
-const Verify = () => {
+const Code = () => {
 
     let navigate = useNavigate();
-    const [email, setEmail] = useState('');
+    const [code, setCode] = useState('');
     const [errors, setErrors] = useState({});
 
     const validateForm = () => {
         const newErrors = {};
-        if (!email) {
-            newErrors.email = 'Email is required';
-        } else if (!/\S+@\S+\.\S+/.test(email)) {
-            newErrors.email = 'Email is invalid';
+        if (!code) {
+            newErrors.code = 'Code is required';
+        } else if (!(code.match(/[a-zA-Z]/))) {
+            newErrors.code = 'Code is invalid';
         }
         return newErrors;
     };
 
-    const verify = async (email) => {
+    const verify_code = async () => {
         try {
-            const response = await axiosRails.post('/verify', {
-                email: email
+            const response = await axiosRails.post('/verify_code', {
+                code: code,
+                email: localStorage.getItem('email')
             });
             console.log("response.data = " + response.data);
-            localStorage.setItem('email', email);
             return response.data;
         } catch (error) {
             throw error;
@@ -41,10 +41,10 @@ const Verify = () => {
         } else {
             setErrors({});
             try {
-                const result = await verify(email);
-                navigate("/code");
+                const result = await verify_code(code);
+                navigate("/update_pw");
             } catch (error) {
-                setErrors({form: 'Login failed. Please try again.'});
+                setErrors({form: 'Code entered did not work.'});
             }
         }
     };
@@ -56,30 +56,25 @@ const Verify = () => {
             </div>
             <div className="login-wrapper">
                 <div className="login-form-container">
-                    <h2 className="login-title">Reset Password</h2>
+                    <h2 className="login-title">Enter Authentication Code</h2>
                     <Form onSubmit={handleSubmit}>
                         <Form.Group className="mb-3" controlId="formBasicEmail">
-                            <Form.Label>Email address</Form.Label>
+                            <Form.Label>Code</Form.Label>
                             <Form.Control
-                                type="email"
-                                placeholder="Enter email"
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)}
-                                isInvalid={!!errors.email}
+                                type="text"
+                                placeholder="Enter code"
+                                value={code}
+                                onChange={(e) => setCode(e.target.value)}
+                                isInvalid={!!errors.code}
                             />
                             <Form.Control.Feedback type="invalid">
-                                {errors.email}
+                                {errors.code}
                             </Form.Control.Feedback>
                         </Form.Group>
 
-                        <Form.Control.Feedback type="invalid">
-                            {errors.password}
-                        </Form.Control.Feedback>
-
                         <Button variant="primary" type="submit" className="w-100">
-                            Get verification code
+                            Submit
                         </Button>
-
 
                     </Form>
                 </div>
@@ -89,4 +84,4 @@ const Verify = () => {
 
 }
 
-export default Verify;
+export default Code;

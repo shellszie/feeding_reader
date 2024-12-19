@@ -7,6 +7,7 @@ import {Navigate} from 'react-router';
 import {Container} from 'react-bootstrap';
 import SavedBooks from "./SavedBooks";
 import Verify from './Verify';
+import Code from './Code';
 
 function App() {
 
@@ -27,10 +28,10 @@ function App() {
         <Container>
             <BrowserRouter>
                 <Routes>
-                    {/*<Route path="/" element={<Books />} />*/}
                     <Route path="/signup" element={<Signup />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/verify" element={<Verify />} />
+                    <Route path="/code" element={<Code />} />
                     <Route
                         path="/"
                         element={
