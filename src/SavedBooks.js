@@ -49,7 +49,7 @@ const SavedBooks = () => {
                 </div>
             </div>
 
-            <Row className="mt-5">
+            <Row className="mt-5 center-text">
                 {savedBooks && savedBooks.map((book, index) => (
                     <Book title={book.title} author={book.author} isbn={book.isbn} img_url={book.img_url}
                           key={index} id={book.id} isSaved={true} handleDelete={handleDelete}/>

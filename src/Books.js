@@ -66,11 +66,11 @@ export default function Books() {
 
             <SearchBox fetchAllbooks={fetchAllBooks}/>
 
-            <div className="right-text">
+            <div className="right-text mb-3">
                 <Link to="/saved" >My Saved Books</Link>
             </div>
 
-            <Row>
+            <Row className="center-text">
                 {allBooks.map((book, index) => (
                     <Book title={book.title} author={book.author} isbn={book.isbn} img_url={book.img_url} key={index}
                           id={book.id} isSaved={false} />

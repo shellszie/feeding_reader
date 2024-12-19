@@ -47,14 +47,16 @@ const Book = ({isbn, title, author, img_url, id, isSaved, handleDelete}) => {
             {hasPreview &&
                 <Col id={id}>
                     {isSaved &&
-                        <div className="mb-1 right-text" onClick={() => handleDelete(isbn, id)}>
+                        <div className="mb-1" onClick={() => handleDelete(isbn, id)}>
                             <i className="fa-solid fa-circle-xmark fa-2xl"></i>
                         </div>
                     }
                     <img alt={title} src={img_url}/>
                     <br/>
                     <span>{title} by {author}</span>
-                    <BookViewer isbn={isbn} id={id}/>
+                    <div>
+                        <BookViewer isbn={isbn} id={id}/>
+                    </div>
                     {!isSaved &&
                         <>
                             <div className="center-text">
