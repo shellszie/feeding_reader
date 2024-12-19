@@ -26,8 +26,7 @@ const Code = () => {
                 code: code,
                 email: localStorage.getItem('email')
             });
-            console.log("response.data = " + response.data);
-            return response.data;
+            return response.statusText;
         } catch (error) {
             throw error;
         }
@@ -42,7 +41,12 @@ const Code = () => {
             setErrors({});
             try {
                 const result = await verify_code(code);
-                navigate("/update_pw");
+                if (result == "OK") {
+                    navigate("/update_pw");
+                }
+                else {
+                    console.log("error with auth code");
+                }
             } catch (error) {
                 setErrors({form: 'Code entered did not work.'});
             }
