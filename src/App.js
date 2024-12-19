@@ -11,13 +11,9 @@ import Code from './Code';
 
 function App() {
 
-    const ProtectedRoute = ({
-                                jwt,
-                                redirectPath = '/login',
-                                children,
-                            }) => {
-        if (!jwt) {
-            return <Navigate to={redirectPath} replace />;
+    const ProtectedRoute = ({children}) => {
+        if (!localStorage.getItem('jwt')) {
+            return <Navigate to="/" replace />;
         }
         else {
            return children;
@@ -36,7 +32,7 @@ function App() {
                     <Route
                         path="/"
                         element={
-                            <ProtectedRoute jwt={localStorage.getItem('jwt')}>
+                            <ProtectedRoute>
                                 <Books />
                             </ProtectedRoute>
                         }
@@ -44,7 +40,7 @@ function App() {
                     <Route
                         path="/saved"
                         element={
-                            <ProtectedRoute jwt={localStorage.getItem('jwt')}>
+                            <ProtectedRoute>
                                 <SavedBooks />
                             </ProtectedRoute>
                         }
