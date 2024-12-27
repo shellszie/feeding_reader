@@ -42,6 +42,16 @@ const Book = ({isbn, title, author, img_url, id, isSaved, handleDelete}) => {
         }
     }
 
+    const handleLike = async (isbn) => {
+        try {
+            const response = await axiosRails.post( '/likeBook', {
+                isbn: isbn
+            });
+        } catch (error) {
+            throw error;
+        }
+    }
+
     return (
         <>
             {hasPreview &&
@@ -63,7 +73,7 @@ const Book = ({isbn, title, author, img_url, id, isSaved, handleDelete}) => {
                                 <Button variant="" onClick={() => handleSave(title, author, isbn, img_url)}>
                                     <i className="fa-solid fa-floppy-disk fa-2xl"></i>
                                 </Button>
-                                <Button variant="">
+                                <Button variant="" onClick={() => handleLike(isbn)}>
                                     <i className="fa-solid fa-thumbs-up fa-2xl"></i>
                                 </Button>
                             </div>
