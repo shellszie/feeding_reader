@@ -62,7 +62,9 @@ const Book = ({isbn, title, author, img_url, id, savedPage, handleDelete, isSave
                                 </Button>
                             }
                             {isSavedBook &&
-                                <i className="fa-solid fa-heart fa-2xl"></i>
+                                <Button variant="">
+                                    <i className="fa-solid fa-heart fa-2xl"></i>
+                                </Button>
                             }
                                 {/*<div className="center-text">*/}
                             {/*    {confirm}*/}
