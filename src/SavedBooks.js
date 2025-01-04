@@ -35,20 +35,6 @@ const SavedBooks = () => {
 
     return (
         <Container>
-
-            <div className="heading-wrapper">
-                <div className="feeding-reader">
-                    <img alt="Feeding Reader Book Previews" src="logo_50x50.png" className="logo"/>&nbsp;
-                    <span>Feeding Reader</span>
-                </div>
-                <div className="my-saved-books">My Saved Books</div>
-                <Link to="/">Return Home</Link>
-                <div className="mt-3">
-                    <div>Welcome {localStorage.getItem('email')}</div>
-                    <Logout/>
-                </div>
-            </div>
-
             <Row className="mt-5 center-text">
                 {savedBooks && savedBooks.map((book, index) => (
                     <Book title={book.title} author={book.author} isbn={book.isbn} img_url={book.img_url}

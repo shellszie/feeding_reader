@@ -69,17 +69,17 @@ const Book = ({isbn, title, author, img_url, id, isSaved, handleDelete}) => {
                     </div>
                     {!isSaved &&
                         <>
-                            {/*<div className="center-text">*/}
+                            <div className="center-text">
                             {/*    <Button variant="">*/}
                             {/*        <i className="fa-regular fa-thumbs-down fa-2xl"></i>*/}
                             {/*    </Button>*/}
                             {/*    <Button variant="" onClick={() => handleLike(isbn)}>*/}
                             {/*        <i className="fa-regular fa-thumbs-up fa-2xl"></i>*/}
                             {/*    </Button>*/}
-                            {/*    <Button variant="" onClick={() => handleSave(title, author, isbn, img_url)}>*/}
-                            {/*        <i className="fa-regular fa-heart fa-2xl"></i>*/}
-                            {/*    </Button>*/}
-                            {/*</div>*/}
+                                <Button variant="" onClick={() => handleSave(title, author, isbn, img_url)}>
+                                    <i className="fa-regular fa-heart fa-2xl"></i>
+                                </Button>
+                            </div>
                             <div className="center-text">
                                 {confirm}
                             </div>

@@ -8,6 +8,7 @@ import {Container} from 'react-bootstrap';
 import SavedBooks from "./SavedBooks";
 import Verify from './Verify';
 import Code from './Code';
+import Home from './Home.js'
 
 function App() {
 
@@ -33,18 +34,18 @@ function App() {
                         path="/"
                         element={
                             <ProtectedRoute>
-                                <Books />
+                                <Home />
                             </ProtectedRoute>
                         }
                     />
-                    <Route
-                        path="/saved"
-                        element={
-                            <ProtectedRoute>
-                                <SavedBooks />
-                            </ProtectedRoute>
-                        }
-                    />
+                    {/*<Route*/}
+                    {/*    path="/saved"*/}
+                    {/*    element={*/}
+                    {/*        <ProtectedRoute>*/}
+                    {/*            <SavedBooks />*/}
+                    {/*        </ProtectedRoute>*/}
+                    {/*    }*/}
+                    {/*/>*/}
                 </Routes>
             </BrowserRouter>
         </Container>

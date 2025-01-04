@@ -53,22 +53,10 @@ export default function Books() {
 
     return (
         <>
-            <div className="heading-wrapper">
-                <div className="feeding-reader">
-                    <img alt="Feeding Reader Book Previews" src="logo_50x50.png" className="logo" />&nbsp;
-                    <span>Feeding Reader</span>
-                </div>
-                <div className="mt-3">
-                    <div>Welcome {localStorage.getItem('email')}</div>
-                    <Logout/>
-                </div>
-            </div>
 
             <SearchBox fetchAllbooks={fetchAllBooks}/>
 
-            <div className="right-text mb-3">
-                <Link to="/saved">My Saved Books</Link>
-            </div>
+
 
             <Row className="center-text">
                 {allBooks.map((book, index) => (
