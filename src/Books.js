@@ -76,8 +76,9 @@ export default function Books() {
                     isbn: isbn,
                     img_url: img_url
                 } });
+
+
             console.log("end of saving and state = " + JSON.stringify(state));
-            debugger
         } catch (error) {
             throw error;
         }

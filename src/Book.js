@@ -45,6 +45,8 @@ const Book = ({isbn, title, author, img_url, id, savedPage, handleDelete, isSave
                     <div>
                         <BookViewer isbn={isbn} id={id}/>
                     </div>
+
+
                     {!savedPage &&
                         <>
                             <div className="center-text">
@@ -60,7 +62,7 @@ const Book = ({isbn, title, author, img_url, id, savedPage, handleDelete, isSave
                                 </Button>
                             }
                             {isSavedBook &&
-                                <i className="fa-solid fa-heart"></i>
+                                <i className="fa-solid fa-heart fa-2xl"></i>
                             }
                                 {/*<div className="center-text">*/}
                             {/*    {confirm}*/}

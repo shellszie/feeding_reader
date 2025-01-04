@@ -7,11 +7,11 @@ const reducer = (state, action) => {
     switch (action.type) {
         case 'ADD':
             return { books: [...state.books, action.payload] };
-        case 'delete':
-            let updated_books = state.filter(elt => elt.isbn !== action.isbn);
+        case 'DELETE':
+            let updated_books = state.books.filter(elt => elt.isbn !== action.payload);
             return updated_books;
-        case 'init':
-            return { books: action.payload || [] };
+        case 'INIT':
+            return { books: (action.payload || [])  };
         default:
             throw new Error();
     }
