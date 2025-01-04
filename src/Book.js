@@ -49,7 +49,7 @@ const Book = ({isbn, title, author, img_url, id, savedPage, handleDelete, isSave
 
                     {!savedPage &&
                         <>
-                            <div className="center-text">
+                            <div className="center-text mb-5">
                             {/*    <Button variant="">*/}
                             {/*        <i className="fa-regular fa-thumbs-down fa-2xl"></i>*/}
                             {/*    </Button>*/}
