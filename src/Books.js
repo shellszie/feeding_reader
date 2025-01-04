@@ -53,10 +53,7 @@ export default function Books() {
 
     return (
         <>
-
             <SearchBox fetchAllbooks={fetchAllBooks}/>
-
-
 
             <Row className="center-text">
                 {allBooks.map((book, index) => (

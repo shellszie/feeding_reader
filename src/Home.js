@@ -11,7 +11,7 @@ function Home() {
 
     return (
         <>
-            <div className="heading-wrapper">
+            <div className="heading-wrapper mb-3">
                 <div className="feeding-reader">
                     <img alt="Feeding Reader Book Previews" src="logo_50x50.png" className="logo"/>&nbsp;
                     <span>Feeding Reader</span>
@@ -21,7 +21,6 @@ function Home() {
                     <div>Welcome {localStorage.getItem('email')}</div>
                     <Logout/>
                 </div>
-
             </div>
 
             <Tabs
