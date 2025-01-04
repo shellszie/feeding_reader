@@ -8,13 +8,28 @@ const reducer = (state, action) => {
         case 'ADD':
             return { books: [...state.books, action.payload] };
         case 'DELETE':
-            let updated_books = state.books.filter(elt => elt.isbn !== action.payload);
-            return updated_books;
+            if (state.books && state.books.length > 0) {
+                let result = removeIsbnElt(state.books, action.payload);
+                return {books: result};
+            }
+            else {
+                console.log("state.books is empty");
+            }
         case 'INIT':
             return { books: (action.payload || [])  };
         default:
             throw new Error();
     }
+}
+
+function removeIsbnElt(arr, isbn) {
+    let result = [];
+    for (let i = 0; i < arr.length; i++) {
+        if (arr[i].isbn !== isbn){
+            result.push(arr[i]);
+        }
+    }
+    return result;
 }
 
 

@@ -13,8 +13,6 @@ const SavedBooks = () => {
     const handleDelete = async (isbn, id) => {
         try {
             const response = await axiosRails.delete( `/savedBook/${isbn}`);
-            // let updatedBooks = removeElt(savedBooks, id);
-            // setSavedBooks(updatedBooks);
             dispatch({ type: 'DELETE', payload: isbn});
         } catch (error) {
             throw error;
@@ -24,7 +22,7 @@ const SavedBooks = () => {
     return (
         <Container>
             <Row className="mt-5 center-text">
-                {state && state.books.map((book, index) => (
+                {state && state.books && state.books.map((book, index) => (
                     <Book title={book.title} author={book.author} isbn={book.isbn} img_url={book.img_url}
                           key={index} id={book.id} savedPage={true} handleDelete={handleDelete} isSavedBook={true} />
                 ))}

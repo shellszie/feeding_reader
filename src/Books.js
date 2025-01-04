@@ -14,9 +14,11 @@ export default function Books() {
     const { state, dispatch } = useSavedContext();
 
     function isSavedBook(isbn) {
-        for (let i = 0; i < state.books.length; i++) {
-            if (state.books[i].isbn == isbn) {
-                return true;
+        if (state && state.books && state.books.length > 0) {
+            for (let i = 0; i < state.books.length; i++) {
+                if (state.books[i].isbn == isbn) {
+                    return true;
+                }
             }
         }
     }
