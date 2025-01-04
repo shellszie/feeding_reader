@@ -69,16 +69,12 @@ export default function Books() {
                 isbn: isbn,
                 img_url: img_url
             });
-            // setConfirm("Saved");
             dispatch({ type: 'ADD', payload: {
-                    title: title,
-                    author: author,
-                    isbn: isbn,
-                    img_url: img_url
-                } });
-
-
-            console.log("end of saving and state = " + JSON.stringify(state));
+                title: title,
+                author: author,
+                isbn: isbn,
+                img_url: img_url
+            } });
         } catch (error) {
             throw error;
         }

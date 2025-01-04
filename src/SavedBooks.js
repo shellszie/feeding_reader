@@ -16,12 +16,10 @@ const SavedBooks = () => {
                 const response = await axiosRails.get('/savedBooks');
                 // setSavedBooks(response.data);
                 dispatch({type: "INIT", payload: response.data});
-                console.log("end of init");
             } catch (error) {
                 console.error(error.message);
             }
         };
-        console.log("savedbooks useeffect was called");
         getSavedBooks();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
