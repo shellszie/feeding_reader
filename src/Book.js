@@ -4,11 +4,13 @@ import BookViewer from './BookViewer.js';
 import Col from 'react-bootstrap/Col';
 import {axiosNode, axiosRails} from './lib';
 import Button from "react-bootstrap/Button";
+import {useSavedContext} from "./context/SavedContext";
 
 const Book = ({isbn, title, author, img_url, id, isSaved, handleDelete}) => {
 
     const [hasPreview, setHasPreview] = useState(false);
-    const [confirm, setConfirm] = useState("");
+    // const [confirm, setConfirm] = useState("");
+    const { state, dispatch } = useSavedContext();
 
     useEffect(() => {
         const doesPreviewExist = async (isbn) => {
@@ -24,7 +26,7 @@ const Book = ({isbn, title, author, img_url, id, isSaved, handleDelete}) => {
             }
         };
         doesPreviewExist(isbn);
-        setConfirm("");
+        // setConfirm("");
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isbn]);
 
@@ -36,7 +38,15 @@ const Book = ({isbn, title, author, img_url, id, isSaved, handleDelete}) => {
                 isbn: isbn,
                 img_url: img_url
             });
-            setConfirm("Saved");
+            // setConfirm("Saved");
+            dispatch({
+                type: 'add',
+                title: title,
+                author: author,
+                isbn: isbn,
+                img_url: img_url
+            });
+            console.log("end of saving");
         } catch (error) {
             throw error;
         }
@@ -80,9 +90,9 @@ const Book = ({isbn, title, author, img_url, id, isSaved, handleDelete}) => {
                                     <i className="fa-regular fa-heart fa-2xl"></i>
                                 </Button>
                             </div>
-                            <div className="center-text">
-                                {confirm}
-                            </div>
+                            {/*<div className="center-text">*/}
+                            {/*    {confirm}*/}
+                            {/*</div>*/}
                         </>
                     }
                 </Col>

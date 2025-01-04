@@ -1,27 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useReducer, useContext, createContext } from 'react';
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 import Logout from "./Logout";
 import {Link} from "react-router";
 import SavedBooks from "./SavedBooks";
 import Books from "./Books.js";
+import Nav from "./Nav.js";
+import {useSavedContext} from "./context/SavedContext";
+import {SavedProvider} from "./context/SavedContext";
 
 function Home() {
     const [key, setKey] = useState('home');
 
+
     return (
         <>
-            <div className="heading-wrapper mb-3">
-                <div className="feeding-reader">
-                    <img alt="Feeding Reader Book Previews" src="logo_50x50.png" className="logo"/>&nbsp;
-                    <span>Feeding Reader</span>
-                </div>
-
-                <div className="mt-3">
-                    <div>Welcome {localStorage.getItem('email')}</div>
-                    <Logout/>
-                </div>
-            </div>
+            <Nav />
 
             <Tabs
                 id="controlled-tab-example"
@@ -30,10 +24,15 @@ function Home() {
                 className="mb-3"
             >
                 <Tab eventKey="home" title="Home">
-                    <Books />
+                    <SavedProvider>
+                        <Books />
+                    </SavedProvider>
+
                 </Tab>
                 <Tab eventKey="saved" title="Saved">
-                    <SavedBooks />
+                    <SavedProvider>
+                        <SavedBooks />
+                    </SavedProvider>
                 </Tab>
             </Tabs>
         </>
