@@ -8,6 +8,6 @@ export default function Logout() {
     }
 
     return (
-        <Link to='/login' onClick={handleLogout}>Logout</Link>
+        <Link to='/login' onClick={handleLogout}><small>Logout</small></Link>
     )
 }
