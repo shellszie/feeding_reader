@@ -47,7 +47,7 @@ export default function Books() {
     }
 
     useEffect(() => {
-        fetchAllBooks('new york times bestsellers');
+        fetchAllBooks('best sellers');
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
@@ -67,7 +67,7 @@ export default function Books() {
             <SearchBox fetchAllbooks={fetchAllBooks}/>
 
             <div className="right-text mb-3">
-                <Link to="/saved" >My Saved Books</Link>
+                <Link to="/saved">My Saved Books</Link>
             </div>
 
             <Row className="center-text">
