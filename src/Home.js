@@ -1,4 +1,4 @@
-import React, { useState, useReducer, useContext, createContext } from 'react';
+import React, {useState, useReducer, useContext, createContext, useEffect} from 'react';
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 import Logout from "./Logout";
@@ -8,10 +8,25 @@ import Books from "./Books.js";
 import Nav from "./Nav.js";
 import {useSavedContext} from "./context/SavedContext";
 import {SavedProvider} from "./context/SavedContext";
+import {axiosRails} from "./lib";
 
 function Home() {
     const [key, setKey] = useState('home');
+    const { state, dispatch } = useSavedContext();
 
+    useEffect(() => {
+        const getSavedBooks = async () => {
+            try {
+                const response = await axiosRails.get('/savedBooks');
+                // setSavedBooks(response.data);
+                dispatch({type: "INIT", payload: response.data});
+            } catch (error) {
+                console.error(error.message);
+            }
+        };
+        getSavedBooks();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     return (
         <>
@@ -24,15 +39,10 @@ function Home() {
                 className="mb-3"
             >
                 <Tab eventKey="home" title="Home">
-                    <SavedProvider>
-                        <Books />
-                    </SavedProvider>
-
+                    <Books />
                 </Tab>
                 <Tab eventKey="saved" title="Saved">
-                    <SavedProvider>
-                        <SavedBooks />
-                    </SavedProvider>
+                    <SavedBooks />
                 </Tab>
             </Tabs>
         </>

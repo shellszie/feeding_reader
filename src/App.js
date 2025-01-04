@@ -9,6 +9,7 @@ import SavedBooks from "./SavedBooks";
 import Verify from './Verify';
 import Code from './Code';
 import Home from './Home.js'
+import {SavedProvider} from "./context/SavedContext";
 
 function App() {
 
@@ -34,7 +35,9 @@ function App() {
                         path="/"
                         element={
                             <ProtectedRoute>
-                                <Home />
+                                <SavedProvider>
+                                    <Home />
+                                </SavedProvider>
                             </ProtectedRoute>
                         }
                     />
