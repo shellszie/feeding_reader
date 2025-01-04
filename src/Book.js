@@ -6,7 +6,7 @@ import {axiosNode, axiosRails} from './lib';
 import Button from "react-bootstrap/Button";
 import {useSavedContext} from "./context/SavedContext";
 
-const Book = ({isbn, title, author, img_url, id, isSaved, handleDelete}) => {
+const Book = ({isbn, title, author, img_url, id, savedPage, handleDelete, isSavedBook, handleSave}) => {
 
     const [hasPreview, setHasPreview] = useState(false);
     // const [confirm, setConfirm] = useState("");
@@ -30,43 +30,11 @@ const Book = ({isbn, title, author, img_url, id, isSaved, handleDelete}) => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isbn]);
 
-    const handleSave = async (title, author, isbn, img_url) => {
-        try {
-            const response = await axiosRails.post( '/saveBook', {
-                title: title,
-                author: author,
-                isbn: isbn,
-                img_url: img_url
-            });
-            // setConfirm("Saved");
-            dispatch({
-                type: 'add',
-                title: title,
-                author: author,
-                isbn: isbn,
-                img_url: img_url
-            });
-            console.log("end of saving");
-        } catch (error) {
-            throw error;
-        }
-    }
-
-    const handleLike = async (isbn) => {
-        try {
-            const response = await axiosRails.post( '/likeBook', {
-                isbn: isbn
-            });
-        } catch (error) {
-            throw error;
-        }
-    }
-
     return (
         <>
             {hasPreview &&
                 <Col id={id}>
-                    {isSaved &&
+                    {savedPage &&
                         <div className="mb-1" onClick={() => handleDelete(isbn, id)}>
                             <i className="fa-solid fa-circle-xmark fa-2xl"></i>
                         </div>
@@ -77,7 +45,7 @@ const Book = ({isbn, title, author, img_url, id, isSaved, handleDelete}) => {
                     <div>
                         <BookViewer isbn={isbn} id={id}/>
                     </div>
-                    {!isSaved &&
+                    {!savedPage &&
                         <>
                             <div className="center-text">
                             {/*    <Button variant="">*/}
@@ -86,13 +54,18 @@ const Book = ({isbn, title, author, img_url, id, isSaved, handleDelete}) => {
                             {/*    <Button variant="" onClick={() => handleLike(isbn)}>*/}
                             {/*        <i className="fa-regular fa-thumbs-up fa-2xl"></i>*/}
                             {/*    </Button>*/}
+                            {!isSavedBook &&
                                 <Button variant="" onClick={() => handleSave(title, author, isbn, img_url)}>
                                     <i className="fa-regular fa-heart fa-2xl"></i>
                                 </Button>
-                            </div>
-                            {/*<div className="center-text">*/}
+                            }
+                            {isSavedBook &&
+                                <i className="fa-solid fa-heart"></i>
+                            }
+                                {/*<div className="center-text">*/}
                             {/*    {confirm}*/}
                             {/*</div>*/}
+                            </div>
                         </>
                     }
                 </Col>

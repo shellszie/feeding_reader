@@ -4,8 +4,7 @@ import Book from "./Book";
 import {Container, Row} from "react-bootstrap";
 import Logout from "./Logout";
 import {Link} from 'react-router';
-import {useSavedContext} from "./context/SavedContext";
-
+import {SavedProvider, useSavedContext} from "./context/SavedContext";
 const SavedBooks = () => {
 
     // const [savedBooks, setSavedBooks] = useState(null);
@@ -16,7 +15,7 @@ const SavedBooks = () => {
             try {
                 const response = await axiosRails.get('/savedBooks');
                 // setSavedBooks(response.data);
-                dispatch({type: "init", books: response.data});
+                dispatch({type: "init", payload: response.data});
                 console.log("end of init");
             } catch (error) {
                 console.error(error.message);
@@ -40,9 +39,9 @@ const SavedBooks = () => {
     return (
         <Container>
             <Row className="mt-5 center-text">
-                {state && state.map((book, index) => (
+                {state && state.books.map((book, index) => (
                     <Book title={book.title} author={book.author} isbn={book.isbn} img_url={book.img_url}
-                          key={index} id={book.id} isSaved={true} handleDelete={handleDelete}/>
+                          key={index} id={book.id} savedPage={true} handleDelete={handleDelete} isSavedBook={true} />
                 ))}
             </Row>
         </Container>
