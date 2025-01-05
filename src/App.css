@@ -2,9 +2,21 @@
   max-width: 90% !important;  /* Make sure the modal takes up 90% of the viewport width */
 }
 
+.logo-title {
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.logo {
+  height: 50px;
+  width: 50px;
+}
+
 .feeding-reader {
   font-size: clamp(2rem, 7vw, 3rem);
   vertical-align: bottom;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .my-saved-books {
