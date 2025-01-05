@@ -39,10 +39,10 @@ export default function Books({handleDelete}) {
         }
     }
 
-    function isThumbsDownBook(isbn) {
+    function isThumbsDownBook(isbn, title) {
         if (thumbsDownState && thumbsDownState.books && thumbsDownState.books.length > 0) {
             for (let i = 0; i < thumbsDownState.books.length; i++) {
-                if (thumbsDownState.books[i].isbn == isbn) {
+                if ((thumbsDownState.books[i].isbn == isbn) || (thumbsDownState.books[i].title == title )) {
                     return true;
                 }
             }
@@ -61,11 +61,18 @@ export default function Books({handleDelete}) {
         }
     }
 
-    const handleThumbsDown = async (isbn) => {
+    const handleThumbsDown = async (isbn, title, author) => {
         try {
-            debugger
-            const response = await axiosRails.post( `/thumbsDownBook/${isbn}`);
-            thumbsDownDispatch({ type: 'ADD', payload: {isbn: isbn}});
+            const response = await axiosRails.post( `/thumbsDownBook`, {
+                isbn: isbn,
+                title: title,
+                author: author
+            });
+            thumbsDownDispatch({ type: 'ADD', payload: {
+                isbn: isbn,
+                title: title,
+                author: author
+            }});
         } catch (error) {
             throw error;
         }
@@ -153,7 +160,7 @@ export default function Books({handleDelete}) {
                         id={book.id} savedPage={false} isSavedBook={isSavedBook(book.isbn)} handleSave={handleSave}
                         handleDelete={handleDelete} isThumbsUpBook={isThumbsUpBook(book.isbn)}
                           handleThumbsUp={handleThumbsUp} removeThumbsUp={removeThumbsUp}
-                          handleThumbsDown={handleThumbsDown} isThumbsDownBook={isThumbsDownBook(book.isbn)} />
+                          handleThumbsDown={handleThumbsDown} isThumbsDownBook={isThumbsDownBook(book.isbn, book.title)} />
                 ))}
             </Row>
         </>
