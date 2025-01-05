@@ -47,7 +47,7 @@ export default function SearchBox({fetchAllbooks}) {
             <Form.Group controlId="searchTerm">
                 <Form.Control
                     type="text"
-                    placeholder="Best Sellers"
+                    placeholder="Fiction"
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
                     className="my-form"

@@ -59,7 +59,7 @@ export default function Books({handleDelete}) {
     }
 
     useEffect(() => {
-        fetchAllBooks('best sellers');
+        fetchAllBooks('Fiction');
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
