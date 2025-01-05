@@ -6,7 +6,7 @@ function Nav() {
         <div className="heading-wrapper mb-3">
             <div className="feeding-reader">
                 <img alt="Feeding Reader Book Previews" src="logo_50x50.png" className="logo mt-3" />&nbsp;
-                <span className="logo-title">
+                <span className="logo-title mt-2">
                     <span>Feeding</span>&nbsp;<span>Reader</span>
                 </span>
             </div>

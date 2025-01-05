@@ -13,7 +13,7 @@
 }
 
 .feeding-reader {
-  font-size: clamp(2rem, 7vw, 3rem);
+  font-size: clamp(1rem, 5vw, 3rem);
   vertical-align: bottom;
   display: flex;
   flex-wrap: wrap;
@@ -24,6 +24,12 @@
   flex-wrap: wrap;
   justify-content: flex-end;
 }
+
+.heading-wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
 
 .my-saved-books {
   font-size: clamp(1.5rem, 5vw, 3rem);
@@ -43,11 +49,6 @@
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0,0,0,0.1);
   background-color: #fff;
-}
-
-.heading-wrapper {
-  display: flex;
-  justify-content: space-between;
 }
 
 .login-title {
