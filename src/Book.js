@@ -9,8 +9,6 @@ import {useSavedContext} from "./context/SavedContext";
 const Book = ({isbn, title, author, img_url, id, savedPage, handleDelete, isSavedBook, handleSave}) => {
 
     const [hasPreview, setHasPreview] = useState(false);
-    // const [confirm, setConfirm] = useState("");
-    const { state, dispatch } = useSavedContext();
 
     useEffect(() => {
         const doesPreviewExist = async (isbn) => {
@@ -26,9 +24,18 @@ const Book = ({isbn, title, author, img_url, id, savedPage, handleDelete, isSave
             }
         };
         doesPreviewExist(isbn);
-        // setConfirm("");
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isbn]);
+
+    const handleLike = async (isbn) => {
+        try {
+            const response = await axiosRails.post( '/likeBook', {
+                isbn: isbn
+            });
+        } catch (error) {
+            throw error;
+        }
+    }
 
     return (
         <>
@@ -53,9 +60,10 @@ const Book = ({isbn, title, author, img_url, id, savedPage, handleDelete, isSave
                             {/*    <Button variant="">*/}
                             {/*        <i className="fa-regular fa-thumbs-down fa-2xl"></i>*/}
                             {/*    </Button>*/}
-                            {/*    <Button variant="" onClick={() => handleLike(isbn)}>*/}
-                            {/*        <i className="fa-regular fa-thumbs-up fa-2xl"></i>*/}
-                            {/*    </Button>*/}
+
+                                <Button variant="" onClick={() => handleLike(isbn)}>
+                                    <i className="fa-regular fa-thumbs-up fa-2xl"></i>
+                                </Button>
                             {!isSavedBook &&
                                 <Button variant="" onClick={() => handleSave(title, author, isbn, img_url)}>
                                     <i className="fa-regular fa-heart fa-2xl"></i>

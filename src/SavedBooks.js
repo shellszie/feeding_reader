@@ -7,7 +7,6 @@ import {Link} from 'react-router';
 import {SavedProvider, useSavedContext} from "./context/SavedContext";
 const SavedBooks = ({handleDelete}) => {
 
-    // const [savedBooks, setSavedBooks] = useState(null);
     const { state, dispatch } = useSavedContext();
 
     return (
