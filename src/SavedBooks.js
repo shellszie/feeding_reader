@@ -16,6 +16,11 @@ const SavedBooks = ({handleDelete}) => {
                     <Book title={book.title} author={book.author} isbn={book.isbn} img_url={book.img_url}
                           key={index} id={book.id} savedPage={true} handleDelete={handleDelete} isSavedBook={true} />
                 ))}
+                {state.books.length == 0 &&
+                    <div>
+                        Click <span className="m-1"><i className="fa-regular fa-heart fa-2xl"></i></span> to add books to your Favorites
+                    </div>
+                }
             </Row>
         </Container>
     );
