@@ -21,7 +21,8 @@
 
 .welcome-text {
   display: flex;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
+  justify-content: flex-end;
 }
 
 .my-saved-books {
