@@ -8,12 +8,15 @@ import Logout from "./Logout";
 import {Link} from "react-router";
 import {SavedProvider, useSavedContext} from "./context/SavedContext";
 import {useThumbsUpContext} from "./context/ThumbsUpContext";
+import {useThumbsDownContext} from "./context/ThumbsDownContext";
+
 
 export default function Books({handleDelete}) {
 
     const [allBooks, setAllBooks] = useState([]);
     const { state, dispatch } = useSavedContext();
     const {thumbsUpState, thumbsUpDispatch} = useThumbsUpContext();
+    const {thumbsDownState, thumbsDownDispatch} = useThumbsDownContext();
 
     function isSavedBook(isbn) {
         if (state && state.books && state.books.length > 0) {
@@ -32,8 +35,22 @@ export default function Books({handleDelete}) {
                     return true;
                 }
             }
+            return false;
         }
     }
+
+    function isThumbsDownBook(isbn) {
+        if (thumbsDownState && thumbsDownState.books && thumbsDownState.books.length > 0) {
+            for (let i = 0; i < thumbsDownState.books.length; i++) {
+                if (thumbsDownState.books[i].isbn == isbn) {
+                    return true;
+                }
+            }
+            return false;
+        }
+        return false;
+    }
+
 
     const removeThumbsUp = async (isbn) => {
         try {
@@ -43,6 +60,17 @@ export default function Books({handleDelete}) {
             throw error;
         }
     }
+
+    const handleThumbsDown = async (isbn) => {
+        try {
+            debugger
+            const response = await axiosRails.post( `/thumbsDownBook/${isbn}`);
+            thumbsDownDispatch({ type: 'ADD', payload: {isbn: isbn}});
+        } catch (error) {
+            throw error;
+        }
+    }
+
 
     function parseBookData(input) {
         let items = input.items;
@@ -124,7 +152,8 @@ export default function Books({handleDelete}) {
                     <Book title={book.title} author={book.author} isbn={book.isbn} img_url={book.img_url} key={index}
                         id={book.id} savedPage={false} isSavedBook={isSavedBook(book.isbn)} handleSave={handleSave}
                         handleDelete={handleDelete} isThumbsUpBook={isThumbsUpBook(book.isbn)}
-                          handleThumbsUp={handleThumbsUp} removeThumbsUp={removeThumbsUp} />
+                          handleThumbsUp={handleThumbsUp} removeThumbsUp={removeThumbsUp}
+                          handleThumbsDown={handleThumbsDown} isThumbsDownBook={isThumbsDownBook(book.isbn)} />
                 ))}
             </Row>
         </>

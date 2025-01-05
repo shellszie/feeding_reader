@@ -11,6 +11,7 @@ import Code from './Code';
 import Home from './Home.js'
 import {SavedProvider} from "./context/SavedContext";
 import {ThumbsUpProvider} from "./context/ThumbsUpContext";
+import {ThumbsDownProvider} from "./context/ThumbsDownContext";
 
 function App() {
 
@@ -36,11 +37,13 @@ function App() {
                         path="/"
                         element={
                             <ProtectedRoute>
-                                <ThumbsUpProvider>
-                                    <SavedProvider>
-                                        <Home />
-                                    </SavedProvider>
-                                </ThumbsUpProvider>
+                                <ThumbsDownProvider>
+                                    <ThumbsUpProvider>
+                                        <SavedProvider>
+                                            <Home />
+                                        </SavedProvider>
+                                    </ThumbsUpProvider>
+                                </ThumbsDownProvider>
                             </ProtectedRoute>
                         }
                     />

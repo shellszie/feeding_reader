@@ -10,11 +10,13 @@ import {useSavedContext} from "./context/SavedContext";
 import {SavedProvider} from "./context/SavedContext";
 import {axiosRails} from "./lib";
 import {useThumbsUpContext} from "./context/ThumbsUpContext";
+import {useThumbsDownContext} from "./context/ThumbsDownContext";
 
 function Home() {
     const [key, setKey] = useState('home');
     const { state, dispatch } = useSavedContext();
     const {thumbsUpState, thumbsUpDispatch} = useThumbsUpContext();
+    const {thumbsDownState, thumbsDownDispatch} = useThumbsDownContext();
 
     useEffect(() => {
         const getSavedBooks = async () => {
@@ -30,12 +32,30 @@ function Home() {
         const getThumbsUpBooks = async () => {
             try {
                 const response = await axiosRails.get('/thumbsUpBooks');
-                thumbsUpDispatch({type: "INIT", payload: response.data});
+                let result = [];
+                if (response.data !== "") {
+                    result = response.data;
+                }
+                thumbsUpDispatch({type: "INIT", payload: result});
             } catch (error) {
                 console.error(error.message);
             }
         };
         getThumbsUpBooks();
+
+        const getThumbsDownBooks = async () => {
+            try {
+                const response = await axiosRails.get('/thumbsDownBooks');
+                let result = [];
+                if (response.data !== "") {
+                    result = response.data;
+                }
+                thumbsDownDispatch({type: "INIT", payload: result});
+            } catch (error) {
+                console.error(error.message);
+            }
+        };
+        getThumbsDownBooks();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
