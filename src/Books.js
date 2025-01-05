@@ -96,7 +96,6 @@ export default function Books({handleDelete}) {
 
     const handleThumbsUp = async (isbn) => {
         try {
-            debugger
             const response = await axiosRails.post( '/likeBook', {
                 isbn: isbn
             });

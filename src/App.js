@@ -44,14 +44,6 @@ function App() {
                             </ProtectedRoute>
                         }
                     />
-                    {/*<Route*/}
-                    {/*    path="/saved"*/}
-                    {/*    element={*/}
-                    {/*        <ProtectedRoute>*/}
-                    {/*            <SavedBooks />*/}
-                    {/*        </ProtectedRoute>*/}
-                    {/*    }*/}
-                    {/*/>*/}
                 </Routes>
             </BrowserRouter>
         </Container>

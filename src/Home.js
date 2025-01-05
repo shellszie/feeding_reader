@@ -9,22 +9,33 @@ import Nav from "./Nav.js";
 import {useSavedContext} from "./context/SavedContext";
 import {SavedProvider} from "./context/SavedContext";
 import {axiosRails} from "./lib";
+import {useThumbsUpContext} from "./context/ThumbsUpContext";
 
 function Home() {
     const [key, setKey] = useState('home');
     const { state, dispatch } = useSavedContext();
+    const {thumbsUpState, thumbsUpDispatch} = useThumbsUpContext();
 
     useEffect(() => {
         const getSavedBooks = async () => {
             try {
                 const response = await axiosRails.get('/savedBooks');
-                // setSavedBooks(response.data);
                 dispatch({type: "INIT", payload: response.data});
             } catch (error) {
                 console.error(error.message);
             }
         };
         getSavedBooks();
+
+        const getThumbsUpBooks = async () => {
+            try {
+                const response = await axiosRails.get('/thumbsUpBooks');
+                thumbsUpDispatch({type: "INIT", payload: response.data});
+            } catch (error) {
+                console.error(error.message);
+            }
+        };
+        getThumbsUpBooks();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
@@ -41,7 +52,6 @@ function Home() {
     return (
         <>
             <Nav />
-
             <Tabs
                 id="controlled-tab-example"
                 activeKey={key}
@@ -56,8 +66,7 @@ function Home() {
                 </Tab>
             </Tabs>
         </>
-)
-    ;
+    );
 }
 
 export default Home;
