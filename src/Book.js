@@ -7,7 +7,7 @@ import Button from "react-bootstrap/Button";
 import {useSavedContext} from "./context/SavedContext";
 
 const Book = ({isbn, title, author, img_url, id, savedPage, handleDelete, isSavedBook, handleSave,
-                isThumbsUpBook, handleThumbsUp}) => {
+                isThumbsUpBook, handleThumbsUp, removeThumbsUp}) => {
 
     const [hasPreview, setHasPreview] = useState(false);
 
@@ -57,7 +57,7 @@ const Book = ({isbn, title, author, img_url, id, savedPage, handleDelete, isSave
                                 </Button>
                             }
                             {isThumbsUpBook &&
-                                <Button variant="" onClick={() => handleThumbsUp(isbn)}>
+                                <Button variant="" onClick={() => removeThumbsUp(isbn)}>
                                     <i className="fa-solid fa-thumbs-up fa-2xl"></i>
                                 </Button>
                             }

@@ -6,7 +6,7 @@ const thumbsUpReducer = (thumbsUpState, action) => {
     switch (action.type) {
         case 'ADD':
             return { books: [...thumbsUpState.books, action.payload] };
-        case 'REMOVE':
+        case 'DELETE':
             if (thumbsUpState.books && thumbsUpState.books.length > 0) {
                 let result = removeIsbnElt(thumbsUpState.books, action.payload);
                 return {books: result};

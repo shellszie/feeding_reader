@@ -34,6 +34,16 @@ export default function Books({handleDelete}) {
             }
         }
     }
+
+    const removeThumbsUp = async (isbn) => {
+        try {
+            const response = await axiosRails.delete( `/thumbsUpBook/${isbn}`);
+            thumbsUpDispatch({ type: 'DELETE', payload: isbn});
+        } catch (error) {
+            throw error;
+        }
+    }
+
     function parseBookData(input) {
         let items = input.items;
         let result = [];
@@ -114,7 +124,7 @@ export default function Books({handleDelete}) {
                     <Book title={book.title} author={book.author} isbn={book.isbn} img_url={book.img_url} key={index}
                         id={book.id} savedPage={false} isSavedBook={isSavedBook(book.isbn)} handleSave={handleSave}
                         handleDelete={handleDelete} isThumbsUpBook={isThumbsUpBook(book.isbn)}
-                          handleThumbsUp={handleThumbsUp} />
+                          handleThumbsUp={handleThumbsUp} removeThumbsUp={removeThumbsUp} />
                 ))}
             </Row>
         </>
