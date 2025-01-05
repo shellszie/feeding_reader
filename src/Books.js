@@ -7,16 +7,28 @@ import SearchBox from "./SearchBox";
 import Logout from "./Logout";
 import {Link} from "react-router";
 import {SavedProvider, useSavedContext} from "./context/SavedContext";
+import {useThumbsUpContext} from "./context/ThumbsUpContext";
 
 export default function Books({handleDelete}) {
 
     const [allBooks, setAllBooks] = useState([]);
     const { state, dispatch } = useSavedContext();
+    const {thumbsUpState, thumbsUpDispatch} = useThumbsUpContext();
 
     function isSavedBook(isbn) {
         if (state && state.books && state.books.length > 0) {
             for (let i = 0; i < state.books.length; i++) {
                 if (state.books[i].isbn == isbn) {
+                    return true;
+                }
+            }
+        }
+    }
+
+    function isThumbsUpBook(isbn) {
+        if (thumbsUpState && thumbsUpState.books && thumbsUpState.books.length > 0) {
+            for (let i = 0; i < thumbsUpState.books.length; i++) {
+                if (thumbsUpState.books[i].isbn == isbn) {
                     return true;
                 }
             }
@@ -82,6 +94,18 @@ export default function Books({handleDelete}) {
         }
     }
 
+    const handleThumbsUp = async (isbn) => {
+        try {
+            debugger
+            const response = await axiosRails.post( '/likeBook', {
+                isbn: isbn
+            });
+            thumbsUpDispatch({ type: 'ADD', payload: {isbn: isbn} });
+        } catch (error) {
+            throw error;
+        }
+    }
+
     return (
         <>
             <SearchBox fetchAllbooks={fetchAllBooks}/>
@@ -90,7 +114,8 @@ export default function Books({handleDelete}) {
                 {allBooks.map((book, index) => (
                     <Book title={book.title} author={book.author} isbn={book.isbn} img_url={book.img_url} key={index}
                         id={book.id} savedPage={false} isSavedBook={isSavedBook(book.isbn)} handleSave={handleSave}
-                        handleDelete={handleDelete} />
+                        handleDelete={handleDelete} isThumbsUpBook={isThumbsUpBook(book.isbn)}
+                          handleThumbsUp={handleThumbsUp} />
                 ))}
             </Row>
         </>

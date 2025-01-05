@@ -10,6 +10,7 @@ import Verify from './Verify';
 import Code from './Code';
 import Home from './Home.js'
 import {SavedProvider} from "./context/SavedContext";
+import {ThumbsUpProvider} from "./context/ThumbsUpContext";
 
 function App() {
 
@@ -35,9 +36,11 @@ function App() {
                         path="/"
                         element={
                             <ProtectedRoute>
-                                <SavedProvider>
-                                    <Home />
-                                </SavedProvider>
+                                <ThumbsUpProvider>
+                                    <SavedProvider>
+                                        <Home />
+                                    </SavedProvider>
+                                </ThumbsUpProvider>
                             </ProtectedRoute>
                         }
                     />
