@@ -51,7 +51,7 @@ function Home() {
                 <Tab eventKey="home" title="Home">
                     <Books handleDelete={handleDelete} />
                 </Tab>
-                <Tab eventKey="saved" title="Saved">
+                <Tab eventKey="saved" title="Favorites">
                     <SavedBooks handleDelete={handleDelete} />
                 </Tab>
             </Tabs>
