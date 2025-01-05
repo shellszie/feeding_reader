@@ -19,6 +19,11 @@
   flex-wrap: wrap;
 }
 
+.welcome-text {
+  display: flex;
+  flex-wrap: nowrap;
+}
+
 .my-saved-books {
   font-size: clamp(1.5rem, 5vw, 3rem);
 }

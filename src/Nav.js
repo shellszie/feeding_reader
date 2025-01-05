@@ -12,7 +12,10 @@ function Nav() {
             </div>
 
             <div className="mt-3">
-                <div>Welcome {localStorage.getItem('email')}</div>
+                <div className="welcome-text">
+                    <span>Welcome</span>&nbsp;
+                    <span>{localStorage.getItem('email')}</span>
+                </div>
                 <div className="right-text">
                     <Logout/>
                 </div>
