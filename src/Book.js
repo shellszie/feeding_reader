@@ -35,7 +35,7 @@ const Book = ({isbn, title, author, img_url, id, savedPage, handleDelete, isSave
             {hasPreview &&
                 <Col id={id}>
                     {savedPage &&
-                        <div className="mb-1" onClick={() => handleDelete(isbn, id)}>
+                        <div className="mb-1" onClick={() => handleDelete(isbn)}>
                             <i className="fa-solid fa-circle-xmark fa-2xl"></i>
                         </div>
                     }
@@ -62,13 +62,10 @@ const Book = ({isbn, title, author, img_url, id, savedPage, handleDelete, isSave
                                 </Button>
                             }
                             {isSavedBook &&
-                                <Button variant="">
+                                <Button variant="" onClick={() => handleDelete(isbn)}>
                                     <i className="fa-solid fa-heart fa-2xl"></i>
                                 </Button>
                             }
-                                {/*<div className="center-text">*/}
-                            {/*    {confirm}*/}
-                            {/*</div>*/}
                             </div>
                         </>
                     }

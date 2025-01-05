@@ -8,7 +8,7 @@ import Logout from "./Logout";
 import {Link} from "react-router";
 import {SavedProvider, useSavedContext} from "./context/SavedContext";
 
-export default function Books() {
+export default function Books({handleDelete}) {
 
     const [allBooks, setAllBooks] = useState([]);
     const { state, dispatch } = useSavedContext();
@@ -89,7 +89,8 @@ export default function Books() {
             <Row className="center-text">
                 {allBooks.map((book, index) => (
                     <Book title={book.title} author={book.author} isbn={book.isbn} img_url={book.img_url} key={index}
-                        id={book.id} savedPage={false} isSavedBook={isSavedBook(book.isbn)} handleSave={handleSave} />
+                        id={book.id} savedPage={false} isSavedBook={isSavedBook(book.isbn)} handleSave={handleSave}
+                        handleDelete={handleDelete} />
                 ))}
             </Row>
         </>

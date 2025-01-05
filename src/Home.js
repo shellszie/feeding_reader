@@ -28,6 +28,16 @@ function Home() {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
+    const handleDelete = async (isbn) => {
+        try {
+            const response = await axiosRails.delete( `/savedBook/${isbn}`);
+            dispatch({ type: 'DELETE', payload: isbn});
+        } catch (error) {
+            throw error;
+        }
+    }
+
+
     return (
         <>
             <Nav />
@@ -39,10 +49,10 @@ function Home() {
                 className="mb-3"
             >
                 <Tab eventKey="home" title="Home">
-                    <Books />
+                    <Books handleDelete={handleDelete} />
                 </Tab>
                 <Tab eventKey="saved" title="Saved">
-                    <SavedBooks />
+                    <SavedBooks handleDelete={handleDelete} />
                 </Tab>
             </Tabs>
         </>

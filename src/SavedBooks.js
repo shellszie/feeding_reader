@@ -5,19 +5,10 @@ import {Container, Row} from "react-bootstrap";
 import Logout from "./Logout";
 import {Link} from 'react-router';
 import {SavedProvider, useSavedContext} from "./context/SavedContext";
-const SavedBooks = () => {
+const SavedBooks = ({handleDelete}) => {
 
     // const [savedBooks, setSavedBooks] = useState(null);
     const { state, dispatch } = useSavedContext();
-
-    const handleDelete = async (isbn, id) => {
-        try {
-            const response = await axiosRails.delete( `/savedBook/${isbn}`);
-            dispatch({ type: 'DELETE', payload: isbn});
-        } catch (error) {
-            throw error;
-        }
-    }
 
     return (
         <Container>
