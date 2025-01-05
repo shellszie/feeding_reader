@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import { Form, Button } from 'react-bootstrap';
 import {axiosRails} from './lib.js';
 import {Link, useNavigate} from "react-router";
+import Nav from "./Nav.js";
 
 export default function Login() {
 
@@ -63,9 +64,7 @@ export default function Login() {
 
     return (
         <>
-            <div className="feeding-reader center-text">
-                Feeding Reader
-            </div>
+            <Nav />
             <div className="login-wrapper">
                 <div className="login-form-container">
                     <h2 className="login-title">Log In</h2>

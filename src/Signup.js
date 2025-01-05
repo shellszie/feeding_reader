@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {Button, Form} from "react-bootstrap";
 import {axiosNode, axiosRails} from "./lib.js";
 import {useNavigate, Link} from 'react-router';
+import Nav from "./Nav.js";
 
 
 export default function Signup({pw_reset}) {
@@ -103,7 +104,7 @@ export default function Signup({pw_reset}) {
 
     return (
         <>
-            <div className="feeding-reader center-text">Feeding Reader</div>
+             <Nav/>
               <div className="login-wrapper">
                  <div className="login-form-container">
                     <h2 className="login-title">Sign Up</h2>

@@ -17,6 +17,7 @@
   vertical-align: bottom;
   display: flex;
   flex-wrap: wrap;
+  align-items: baseline;
 }
 
 .welcome-text {
