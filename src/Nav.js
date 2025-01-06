@@ -11,7 +11,7 @@ function Nav() {
                 </span>
             </div>
 
-            {localStorage.getItem('email') &&
+            {localStorage.getItem('jwt') &&
                 <div className="mt-3">
                     <div className="welcome-text">
                         <span>Welcome</span>&nbsp;

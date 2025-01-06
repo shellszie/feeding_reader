@@ -32,7 +32,7 @@ function App() {
                     <Route path="/login" element={<Login />} />
                     <Route path="/verify" element={<Verify />} />
                     <Route path="/code" element={<Code />} />
-                    <Route path="/update_pw" element={<Login />} />
+                    <Route path="/update_pw" element={<Signup pw_reset={true} />} />
                     <Route
                         path="/"
                         element={

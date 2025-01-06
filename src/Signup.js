@@ -107,7 +107,16 @@ export default function Signup({pw_reset}) {
              <Nav/>
               <div className="login-wrapper">
                  <div className="login-form-container">
-                    <h2 className="login-title">Sign Up</h2>
+                     {pw_reset &&
+                         <h2 className="login-title">
+                             Reset Password
+                         </h2>
+                     }
+                     {!pw_reset &&
+                         <h2 className="login-title">
+                             Sign Up
+                         </h2>
+                     }
                      <Form onSubmit={handleSubmit}>
 
                          {
