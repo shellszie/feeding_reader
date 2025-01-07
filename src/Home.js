@@ -68,7 +68,6 @@ function Home() {
         }
     }
 
-
     return (
         <>
             <Nav />

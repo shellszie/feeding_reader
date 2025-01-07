@@ -12,6 +12,7 @@ import Home from './Home.js'
 import {SavedProvider} from "./context/SavedContext";
 import {ThumbsUpProvider} from "./context/ThumbsUpContext";
 import {ThumbsDownProvider} from "./context/ThumbsDownContext";
+import {EmailProvider} from "./context/EmailContext";
 
 function App() {
 
@@ -37,13 +38,15 @@ function App() {
                         path="/"
                         element={
                             <ProtectedRoute>
-                                <ThumbsDownProvider>
-                                    <ThumbsUpProvider>
-                                        <SavedProvider>
-                                            <Home />
-                                        </SavedProvider>
-                                    </ThumbsUpProvider>
-                                </ThumbsDownProvider>
+                                <EmailProvider>
+                                    <ThumbsDownProvider>
+                                        <ThumbsUpProvider>
+                                            <SavedProvider>
+                                                <Home />
+                                            </SavedProvider>
+                                        </ThumbsUpProvider>
+                                    </ThumbsDownProvider>
+                                </EmailProvider>
                             </ProtectedRoute>
                         }
                     />

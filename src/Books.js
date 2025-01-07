@@ -9,7 +9,7 @@ import {Link} from "react-router";
 import {SavedProvider, useSavedContext} from "./context/SavedContext";
 import {useThumbsUpContext} from "./context/ThumbsUpContext";
 import {useThumbsDownContext} from "./context/ThumbsDownContext";
-
+import {useEmailContext} from "./context/EmailContext";
 
 export default function Books({handleDelete}) {
 
@@ -17,6 +17,7 @@ export default function Books({handleDelete}) {
     const { state, dispatch } = useSavedContext();
     const {thumbsUpState, thumbsUpDispatch} = useThumbsUpContext();
     const {thumbsDownState, thumbsDownDispatch} = useThumbsDownContext();
+    const {emailState, emailDispatch} = useEmailContext();
 
     function isSavedBook(isbn) {
         if (state && state.books && state.books.length > 0) {
@@ -51,11 +52,34 @@ export default function Books({handleDelete}) {
         return false;
     }
 
+    function isEmailedBook(isbn, title) {
+        if (emailState && emailState.books && emailState.books.length > 0) {
+            for (let i = 0; i < emailState.books.length; i++) {
+                if ((emailState.books[i].isbn == isbn) || (emailState.books[i].title == title )) {
+                    return true;
+                }
+            }
+            return false;
+        }
+        return false;
+    }
+
 
     const removeThumbsUp = async (isbn) => {
         try {
             const response = await axiosRails.delete( `/thumbsUpBook/${isbn}`);
             thumbsUpDispatch({ type: 'DELETE', payload: isbn});
+        } catch (error) {
+            throw error;
+        }
+    }
+
+    const handleThumbsUp = async (isbn) => {
+        try {
+            const response = await axiosRails.post( '/likeBook', {
+                isbn: isbn
+            });
+            thumbsUpDispatch({ type: 'ADD', payload: {isbn: isbn} });
         } catch (error) {
             throw error;
         }
@@ -77,6 +101,45 @@ export default function Books({handleDelete}) {
             throw error;
         }
     }
+    const handleSave = async (title, author, isbn, img_url) => {
+        try {
+            const response = await axiosRails.post( '/saveBook', {
+                title: title,
+                author: author,
+                isbn: isbn,
+                img_url: img_url
+            });
+            dispatch({ type: 'ADD', payload: {
+                title: title,
+                author: author,
+                isbn: isbn,
+                img_url: img_url
+                } });
+        } catch (error) {
+            throw error;
+        }
+    }
+
+    const handleEmail = async (title, author, isbn, img_url, preview_url) => {
+        try {
+            const response = await axiosRails.post( '/emailBook', {
+                title: title,
+                author: author,
+                isbn: isbn,
+                img_url: img_url,
+                preview_url: preview_url
+            });
+            emailDispatch({ type: 'ADD', payload: {
+                title: title,
+                author: author,
+                isbn: isbn,
+                img_url: img_url,
+                preview_url: preview_url
+            } });
+        } catch (error) {
+            throw error;
+        }
+    }
 
 
     function parseBookData(input) {
@@ -86,13 +149,15 @@ export default function Books({handleDelete}) {
         for (let i in items) {
             let info = items[i].volumeInfo;
             if (info.industryIdentifiers && info.industryIdentifiers[0] && info.industryIdentifiers[0].identifier &&
-            info.imageLinks && info.imageLinks.thumbnail && info.title && info.authors && info.authors[0]) {
+            info.imageLinks && info.imageLinks.thumbnail && info.title && info.authors && info.authors[0] &&
+            info.previewLink) {
                 let book = {};
                 book.id = ctr++;
                 book.title = info.title ? info.title : "";
                 book.author = info.authors ? info.authors[0] : "";
                 book.img_url = info.imageLinks && info.imageLinks.thumbnail ? info.imageLinks.thumbnail : "";
                 book.isbn = info.industryIdentifiers[0].identifier;
+                book.preview_url = info.previewLink;
                 result.push(book);
             }
             else {
@@ -109,7 +174,8 @@ export default function Books({handleDelete}) {
                     searchTerm: searchTerm
                 }
             });
-            setAllBooks(parseBookData(response.data));
+            let result = parseBookData(response.data);
+            setAllBooks(result);
         } catch (error) {
             console.error('Error fetching data:', error);
         }
@@ -120,35 +186,6 @@ export default function Books({handleDelete}) {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    const handleSave = async (title, author, isbn, img_url) => {
-        try {
-            const response = await axiosRails.post( '/saveBook', {
-                title: title,
-                author: author,
-                isbn: isbn,
-                img_url: img_url
-            });
-            dispatch({ type: 'ADD', payload: {
-                title: title,
-                author: author,
-                isbn: isbn,
-                img_url: img_url
-            } });
-        } catch (error) {
-            throw error;
-        }
-    }
-
-    const handleThumbsUp = async (isbn) => {
-        try {
-            const response = await axiosRails.post( '/likeBook', {
-                isbn: isbn
-            });
-            thumbsUpDispatch({ type: 'ADD', payload: {isbn: isbn} });
-        } catch (error) {
-            throw error;
-        }
-    }
 
     return (
         <>
@@ -156,11 +193,13 @@ export default function Books({handleDelete}) {
 
             <Row className="center-text">
                 {allBooks.map((book, index) => (
-                    <Book title={book.title} author={book.author} isbn={book.isbn} img_url={book.img_url} key={index}
+                    <Book title={book.title} author={book.author} isbn={book.isbn} img_url={book.img_url}
+                          preview_url={book.preview_url} key={index}
                         id={book.id} savedPage={false} isSavedBook={isSavedBook(book.isbn)} handleSave={handleSave}
                         handleDelete={handleDelete} isThumbsUpBook={isThumbsUpBook(book.isbn)}
                           handleThumbsUp={handleThumbsUp} removeThumbsUp={removeThumbsUp}
-                          handleThumbsDown={handleThumbsDown} isThumbsDownBook={isThumbsDownBook(book.isbn, book.title)} />
+                          handleThumbsDown={handleThumbsDown} isThumbsDownBook={isThumbsDownBook(book.isbn, book.title)}
+                            handleEmail={handleEmail} isEmailedBook={isEmailedBook(book.isbn, book.title)} />
                 ))}
             </Row>
         </>

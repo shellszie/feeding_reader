@@ -6,8 +6,9 @@ import {axiosNode, axiosRails} from './lib';
 import Button from "react-bootstrap/Button";
 import {useSavedContext} from "./context/SavedContext";
 
-const Book = ({isbn, title, author, img_url, id, savedPage, handleDelete, isSavedBook, handleSave,
-                isThumbsUpBook, handleThumbsUp, removeThumbsUp, handleThumbsDown, isThumbsDownBook}) => {
+const Book = ({isbn, title, author, img_url, preview_url, id, savedPage, handleDelete, isSavedBook, handleSave,
+                isThumbsUpBook, handleThumbsUp, removeThumbsUp, handleThumbsDown, isThumbsDownBook, isEmailedBook,
+                handleEmail}) => {
 
     const [hasPreview, setHasPreview] = useState(false);
 
@@ -69,6 +70,16 @@ const Book = ({isbn, title, author, img_url, id, savedPage, handleDelete, isSave
                                 {isSavedBook &&
                                     <Button variant="" onClick={() => handleDelete(isbn)}>
                                         <i className="fa-solid fa-heart fa-2xl"></i>
+                                    </Button>
+                                }
+                                {!isEmailedBook &&
+                                    <Button variant="" onClick={() => handleEmail(title, author, isbn, img_url, preview_url)}>
+                                        <i className="fa-regular fa-envelope fa-2xl"></i>
+                                    </Button>
+                                }
+                                {isEmailedBook &&
+                                    <Button variant="">
+                                        <i className="fa-solid fa-envelope fa-2xl"></i>
                                     </Button>
                                 }
                             </div>
