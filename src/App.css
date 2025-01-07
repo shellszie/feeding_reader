@@ -32,9 +32,11 @@
   justify-content: space-between;
 }
 
-
 .saved-delete {
   cursor: pointer;
+  position: relative;
+  left: 65px;
+  top: 10px;
 }
 
 .my-saved-books {
