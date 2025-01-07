@@ -148,9 +148,10 @@ export default function Books({handleDelete}) {
         let ctr = 0;
         for (let i in items) {
             let info = items[i].volumeInfo;
+            let access_info = items[i].accessInfo;
             if (info.industryIdentifiers && info.industryIdentifiers[0] && info.industryIdentifiers[0].identifier &&
             info.imageLinks && info.imageLinks.thumbnail && info.title && info.authors && info.authors[0] &&
-            info.previewLink) {
+            info.previewLink && access_info && access_info.viewability) {
                 let book = {};
                 book.id = ctr++;
                 book.title = info.title ? info.title : "";
@@ -158,6 +159,7 @@ export default function Books({handleDelete}) {
                 book.img_url = info.imageLinks && info.imageLinks.thumbnail ? info.imageLinks.thumbnail : "";
                 book.isbn = info.industryIdentifiers[0].identifier;
                 book.preview_url = info.previewLink;
+                book.viewability = access_info.viewability;
                 result.push(book);
             }
             else {
@@ -194,7 +196,7 @@ export default function Books({handleDelete}) {
             <Row className="center-text">
                 {allBooks.map((book, index) => (
                     <Book title={book.title} author={book.author} isbn={book.isbn} img_url={book.img_url}
-                          preview_url={book.preview_url} key={index}
+                          preview_url={book.preview_url} viewability={book.viewability} key={index}
                         id={book.id} savedPage={false} isSavedBook={isSavedBook(book.isbn)} handleSave={handleSave}
                         handleDelete={handleDelete} isThumbsUpBook={isThumbsUpBook(book.isbn)}
                           handleThumbsUp={handleThumbsUp} removeThumbsUp={removeThumbsUp}

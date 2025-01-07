@@ -6,11 +6,16 @@ import {axiosNode, axiosRails} from './lib';
 import Button from "react-bootstrap/Button";
 import {useSavedContext} from "./context/SavedContext";
 
-const Book = ({isbn, title, author, img_url, preview_url, id, savedPage, handleDelete, isSavedBook, handleSave,
+const Book = ({isbn, title, author, img_url, preview_url, viewability, id, savedPage, handleDelete, isSavedBook, handleSave,
                 isThumbsUpBook, handleThumbsUp, removeThumbsUp, handleThumbsDown, isThumbsDownBook, isEmailedBook,
                 handleEmail}) => {
 
     const [hasPreview, setHasPreview] = useState(false);
+
+    const containsNonDigits = (isbn) => {
+        let hasNonDigit = /\D/.test(isbn);
+        return hasNonDigit;
+    }
 
     useEffect(() => {
         const doesPreviewExist = async (isbn) => {
@@ -20,7 +25,12 @@ const Book = ({isbn, title, author, img_url, preview_url, id, savedPage, handleD
                         isbn: isbn
                     }
                 });
-                setHasPreview(response.data);
+                if (response.data && (viewability !== 'NO_PAGES') && !containsNonDigits(isbn)) {
+                    setHasPreview(true);
+                }
+                else {
+                    setHasPreview(false);
+                }
             } catch (error) {
                 console.error(error.message);
             }
