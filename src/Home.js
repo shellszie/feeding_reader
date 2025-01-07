@@ -11,12 +11,14 @@ import {SavedProvider} from "./context/SavedContext";
 import {axiosRails} from "./lib";
 import {useThumbsUpContext} from "./context/ThumbsUpContext";
 import {useThumbsDownContext} from "./context/ThumbsDownContext";
+import {useEmailContext} from "./context/EmailContext";
 
 function Home() {
     const [key, setKey] = useState('home');
     const { state, dispatch } = useSavedContext();
     const {thumbsUpState, thumbsUpDispatch} = useThumbsUpContext();
     const {thumbsDownState, thumbsDownDispatch} = useThumbsDownContext();
+    const {emailState, emailDispatch} = useEmailContext();
 
     useEffect(() => {
         const getSavedBooks = async () => {
@@ -56,6 +58,22 @@ function Home() {
             }
         };
         getThumbsDownBooks();
+
+        const getEmailBooks = async () => {
+            try {
+                const response = await axiosRails.get('/emailBooks');
+                let result = [];
+                if (response.data !== "") {
+                    result = response.data;
+                }
+                emailDispatch({type: "INIT", payload: result});
+            } catch (error) {
+                console.error(error.message);
+            }
+        };
+        getEmailBooks();
+
+
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
