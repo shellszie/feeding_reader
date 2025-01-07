@@ -33,6 +33,10 @@
 }
 
 
+.saved-delete {
+  cursor: pointer;
+}
+
 .my-saved-books {
   font-size: clamp(1.5rem, 5vw, 3rem);
 }

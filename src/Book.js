@@ -34,7 +34,7 @@ const Book = ({isbn, title, author, img_url, preview_url, id, savedPage, handleD
             {hasPreview && !isThumbsDownBook &&
                 <Col id={id}>
                     {savedPage &&
-                        <div className="mb-1" onClick={() => handleDelete(isbn)}>
+                        <div className="mb-1 saved-delete" onClick={() => handleDelete(isbn)}>
                             <i className="fa-solid fa-circle-xmark fa-2xl"></i>
                         </div>
                     }
