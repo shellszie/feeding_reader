@@ -72,16 +72,16 @@ const Book = ({isbn, title, author, img_url, preview_url, id, savedPage, handleD
                                         <i className="fa-solid fa-heart fa-2xl"></i>
                                     </Button>
                                 }
-                                {!isEmailedBook &&
-                                    <Button variant="" onClick={() => handleEmail(title, author, isbn, img_url, preview_url)}>
-                                        <i className="fa-regular fa-envelope fa-2xl"></i>
-                                    </Button>
-                                }
-                                {isEmailedBook &&
-                                    <Button variant="">
-                                        <i className="fa-solid fa-envelope fa-2xl"></i>
-                                    </Button>
-                                }
+                                {/*{!isEmailedBook &&*/}
+                                {/*    <Button variant="" onClick={() => handleEmail(title, author, isbn, img_url, preview_url)}>*/}
+                                {/*        <i className="fa-regular fa-envelope fa-2xl"></i>*/}
+                                {/*    </Button>*/}
+                                {/*}*/}
+                                {/*{isEmailedBook &&*/}
+                                {/*    <Button variant="">*/}
+                                {/*        <i className="fa-solid fa-envelope fa-2xl"></i>*/}
+                                {/*    </Button>*/}
+                                {/*}*/}
                             </div>
                         </>
                     }
