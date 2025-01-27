@@ -15,7 +15,7 @@ import {ThumbsDownProvider} from "./context/ThumbsDownContext";
 import {EmailProvider} from "./context/EmailContext";
 
 function App() {
-
+    // this is a test
     const ProtectedRoute = ({children}) => {
         if (!localStorage.getItem('jwt')) {
             return <Navigate to="/login" replace />;
