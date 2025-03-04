@@ -3,6 +3,8 @@ import Books from './Books.js';
 import { BrowserRouter, Routes, Route } from "react-router";
 import Signup from './Signup.js';
 import Login from './Login.js';
+import Privacy from './Privacy';
+import Tos from './Tos';
 import {Navigate} from 'react-router';
 import {Container} from 'react-bootstrap';
 import SavedBooks from "./SavedBooks";
@@ -34,6 +36,8 @@ function App() {
                     <Route path="/verify" element={<Verify />} />
                     <Route path="/code" element={<Code />} />
                     <Route path="/update_pw" element={<Signup pw_reset={true} />} />
+                    <Route path="/privacy" element={<Privacy />} />
+                    <Route path="/tos" element={<Tos />} />
                     <Route
                         path="/"
                         element={
