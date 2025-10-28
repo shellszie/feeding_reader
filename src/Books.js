@@ -184,7 +184,7 @@ export default function Books({handleDelete}) {
     }
 
     useEffect(() => {
-        fetchAllBooks('Fiction');
+        fetchAllBooks('Cats');
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
